@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
+public class Player : Character
+{
     public enum ShapeShiftState
     {
         RAT,
@@ -39,4 +41,5 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), .05f);
         }
     }
+}
 }
