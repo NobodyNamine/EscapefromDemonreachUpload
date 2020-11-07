@@ -2,21 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityStandardAssets.Characters.FirstPerson
+public enum ShapeShiftState
 {
+    RAT,
+    HUMAN
+}
+
 public class Player : Character
 {
-    public enum ShapeShiftState
-    {
-        RAT,
-        HUMAN
-    }
-    public class Player : MonoBehaviour
-    {
-        private float counter = 0;
-
         private ShapeShiftState currentState;
-
 
         // Start is called before the first frame update
         void Start()
@@ -40,6 +34,4 @@ public class Player : Character
             else
                 transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), .05f);
         }
-    }
-}
 }
