@@ -2,23 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace UnityStandardAssets.Characters.FirstPerson
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum ShapeShiftState
     {
-        
+        RAT,
+        HUMAN
     }
-
-    // Update is called once per frame
-    void Update()
+    public class Player : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        private float counter = 0;
+
+        private ShapeShiftState currentState;
+
+
+        // Start is called before the first frame update
+        void Start()
         {
-            if (transform.localScale.x == 1)
-                transform.localScale = new Vector3(.25f, .25f, .25f);
+            currentState = ShapeShiftState.HUMAN;
+        }
+
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (currentState == ShapeShiftState.RAT)
+                    currentState = ShapeShiftState.HUMAN;
+                else
+                    currentState = ShapeShiftState.RAT;
+            }
+
+            if (currentState == ShapeShiftState.RAT)
+                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, .25f, 1), .05f);
             else
-                transform.localScale = new Vector3(1, 1, 1);
+                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), .05f);
         }
     }
 }
