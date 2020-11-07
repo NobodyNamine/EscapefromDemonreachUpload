@@ -30,8 +30,8 @@ public class Player : Character
             }
 
             if (currentState == ShapeShiftState.RAT)
-                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, .25f, 1), .05f);
+                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, .25f, 1), .01f);
             else
-                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), .05f);
+                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), .01f);
         }
 }
