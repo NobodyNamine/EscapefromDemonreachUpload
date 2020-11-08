@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : Character
 {
-    private const int NUM_OF_RAYS = 8;
-    private const int CONE_DEGREES = 70;
-    private const float VISION_DISTANCE = 10;
+    private const int NUM_OF_RAYS = 16;
+    private const float CONE_DEGREES = 70;
+    private const float VISION_DISTANCE = 50;
+
+    protected bool foundPlayer = false;
+    protected Vector3 playerPos;
 
     public float moveSpeed;
 
@@ -15,13 +19,18 @@ public class Enemy : Character
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        moveSpeed = 10;
+        moveSpeed = 5;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
         DetectPlayer();
+
+        if(foundPlayer)
+        {
+            Seek(playerPos);
+        }
         //Seek(new Vector3(0, 3.5f, 0));
     }
 
@@ -36,18 +45,21 @@ public class Enemy : Character
         for(int i = 0; i < NUM_OF_RAYS; i++)
         {
             //Calculating direction of the ray
-            Vector3 rayDir = new Vector3(Mathf.Cos((transform.rotation.eulerAngles.y + ((i / NUM_OF_RAYS) * CONE_DEGREES)) * Mathf.Deg2Rad), 0, Mathf.Sin((transform.rotation.eulerAngles.y + ((i / NUM_OF_RAYS) * CONE_DEGREES)) * Mathf.Deg2Rad));
+            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0.1f
+                , Mathf.Cos((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
             RaycastHit hit;
             Player potentialPlayer;
 
             //Shooting out a raycast in that direction
-            bool detected = Physics.Raycast(transform.position, rayDir, out hit, VISION_DISTANCE, layerMask);
+            bool detected = Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), rayDir, out hit, VISION_DISTANCE, layerMask);
             if(detected)
             {
                 if(hit.collider.gameObject.TryGetComponent<Player>(out potentialPlayer))
                 {
                     //SEEK PLAYER HIT
-                    Seek(potentialPlayer.transform.position);
+                    playerPos = potentialPlayer.transform.position;
+                    foundPlayer = true;
+                    //GetComponent<NavMeshAgent>().SetDestination(potentialPlayer.transform.position);
                 }
             }
         }
@@ -56,8 +68,24 @@ public class Enemy : Character
     protected void Seek(Vector3 position)
     {
         Vector3 forceVector = position - transform.position;
+        forceVector *= moveSpeed;
+        //Vector3.ClampMagnitude(forceVector, .5f);
 
-        rigidbody.AddForce(forceVector * moveSpeed);
-        Debug.Log("Here");
+        rigidbody.AddForce(forceVector);
+
+        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
+
+    }
+
+    void OnDrawGizmos()
+    {
+        for (int i = 0; i < NUM_OF_RAYS; i++)
+        {
+            //Calculating direction of the ray
+            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0
+                , Mathf.Cos((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
+
+            Gizmos.DrawLine(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(transform.position.x, 0, transform.position.z) + rayDir * VISION_DISTANCE);
+        }
     }
 }
