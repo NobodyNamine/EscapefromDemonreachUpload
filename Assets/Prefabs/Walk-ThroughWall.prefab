@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5830522422791572025}
   - component: {fileID: 3309287220204026312}
   - component: {fileID: 8260919282737069163}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walk-ThroughWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
