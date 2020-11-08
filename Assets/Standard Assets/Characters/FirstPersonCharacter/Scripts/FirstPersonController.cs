@@ -43,6 +43,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        public bool lockMovement = false;
+
         // Use this for initialization
         private void Start()
         {
@@ -95,6 +97,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+            if (lockMovement)
+                return;
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at

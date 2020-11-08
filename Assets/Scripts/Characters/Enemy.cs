@@ -15,4 +15,12 @@ public class Enemy : Character
     {
         
     }
+
+    protected void DetectPlayer()
+    {
+        int layerMask = 1 << 8;
+        layerMask = layerMask | 1 << 9;
+
+
+    }
 }
