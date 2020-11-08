@@ -32,10 +32,12 @@ public class Player : Character
         ProcessInput();
 
         //Scaling up or down if we need to
+        //later let's [AJ will] move this stuff to abilities and have the speed be a constant in that class and stuff
+        const float speedOfTransformation = 0.8f;
         if (currentState == ShapeShiftState.RAT && transform.localScale.y >= RAT_SCALE + .01f)
-            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, RAT_SCALE, 1), .01f);
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, RAT_SCALE, 1), speedOfTransformation);
         else if(currentState == ShapeShiftState.HUMAN && transform.localScale.y <= HUMAN_SCALE - .01f)
-            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, HUMAN_SCALE, 1), .01f);
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, HUMAN_SCALE, 1), speedOfTransformation);
     }
 
     //Method used to check for input from the player
