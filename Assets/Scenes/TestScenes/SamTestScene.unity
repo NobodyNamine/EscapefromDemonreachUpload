@@ -541,7 +541,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphicsMaterial: {fileID: 2100000, guid: 14e2949e25d05cb42b07646ba0822a6a, type: 2}
-  regularMaterial: {fileID: 2100000, guid: 5aa58e7ece9053641977e288bff26fb2, type: 2}
 --- !u!1 &1107983184 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1502520378097665975, guid: 9164939ba80cbbc489a4a5257397514c,
@@ -647,6 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4798325becf7043986bc9db5a5a61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nightVisionMaterial: {fileID: 2100000, guid: 14e2949e25d05cb42b07646ba0822a6a, type: 2}
 --- !u!1001 &1531188142040894811
 PrefabInstance:
   m_ObjectHideFlags: 0
