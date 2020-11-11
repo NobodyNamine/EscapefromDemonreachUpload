@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public class Enemy : Character
 {
-    private const int NUM_OF_RAYS = 32;
-    private const float CONE_DEGREES = 180;
-    private const float VISION_DISTANCE = 50;
+    private const int NUM_OF_RAYS = 20;
+    private const float CONE_DEGREES = 100;
+    private const float VISION_DISTANCE = 30;
 
     protected bool foundPlayer = false;
     protected Vector3 playerPos;
@@ -15,21 +15,33 @@ public class Enemy : Character
     public float moveSpeed;
 
     private Rigidbody rigidbody;
+
+    protected NavMeshAgent meshAgent;
+
+    public Node path;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        meshAgent = GetComponent<NavMeshAgent>();
         moveSpeed = 5;        
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        DetectPlayer();
+        //If we haven't found the player and
+        if(!DetectPlayer() && meshAgent.destination != path.position)
+        {
+            meshAgent.SetDestination(path.position);
+        }
+
+        if (Vector3.Distance(transform.position, path.position) <= .5f)
+            path = path.next;
     }
 
 
-    protected void DetectPlayer()
+    protected bool DetectPlayer()
     {
         //Calculating the player mask for our player
         int layerMask = 1 << 8;
@@ -51,10 +63,13 @@ public class Enemy : Character
                 if(hit.collider.gameObject.TryGetComponent<Player>(out potentialPlayer))
                 {
                     //SEEK PLAYER HIT
-                    GetComponent<NavMeshAgent>().SetDestination(potentialPlayer.transform.position);
+                    meshAgent.SetDestination(potentialPlayer.transform.position);
+                    return true;
                 }
             }
         }
+
+        return false;
     }
 
     void OnDrawGizmos()
@@ -68,4 +83,6 @@ public class Enemy : Character
             Gizmos.DrawLine(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(transform.position.x, 0, transform.position.z) + rayDir * VISION_DISTANCE);
         }
     }
+
+
 }
