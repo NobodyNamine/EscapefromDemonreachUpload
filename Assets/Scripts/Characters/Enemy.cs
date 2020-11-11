@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Enemy : Character
 {
-    private const int NUM_OF_RAYS = 16;
-    private const float CONE_DEGREES = 70;
+    private const int NUM_OF_RAYS = 32;
+    private const float CONE_DEGREES = 180;
     private const float VISION_DISTANCE = 50;
 
     protected bool foundPlayer = false;
@@ -26,12 +26,6 @@ public class Enemy : Character
     protected virtual void Update()
     {
         DetectPlayer();
-
-        if(foundPlayer)
-        {
-            Seek(playerPos);
-        }
-        //Seek(new Vector3(0, 3.5f, 0));
     }
 
 
@@ -57,24 +51,10 @@ public class Enemy : Character
                 if(hit.collider.gameObject.TryGetComponent<Player>(out potentialPlayer))
                 {
                     //SEEK PLAYER HIT
-                    playerPos = potentialPlayer.transform.position;
-                    foundPlayer = true;
-                    //GetComponent<NavMeshAgent>().SetDestination(potentialPlayer.transform.position);
+                    GetComponent<NavMeshAgent>().SetDestination(potentialPlayer.transform.position);
                 }
             }
         }
-    }
-
-    protected void Seek(Vector3 position)
-    {
-        Vector3 forceVector = position - transform.position;
-        forceVector *= moveSpeed;
-        //Vector3.ClampMagnitude(forceVector, .5f);
-
-        rigidbody.AddForce(forceVector);
-
-        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-
     }
 
     void OnDrawGizmos()
