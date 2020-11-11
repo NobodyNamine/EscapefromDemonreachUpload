@@ -22,7 +22,7 @@ public class LightFlicker : MonoBehaviour
         yCoord = Random.Range(0, 1);
 
 
-        seed = transform.parent.position.x;
+        seed = Vector3.Magnitude(transform.parent.position);
     }
 
     // Update is called once per frame
