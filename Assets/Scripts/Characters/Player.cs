@@ -27,7 +27,7 @@ public class Player : Character
 
     private const float RAT_SCALE = .1f;
     private const float HUMAN_SCALE = 1f;
-    private const float VIGNETTE_MAX = .5f;
+    private const float VIGNETTE_MAX = .55f;
     private const float VIGNETTE_MIN = .6f;
 
 
@@ -36,6 +36,7 @@ public class Player : Character
     {
         currentState = ShapeShiftState.HUMAN;
         vignetteState = VignetteState.SMALL;
+        nightVisionMaterial.SetFloat("_MaskStrength", VIGNETTE_MIN);
     }
 
     // Update is called once per frame
@@ -66,7 +67,11 @@ public class Player : Character
                 if (Mathf.Abs(nightVisionMaterial.GetFloat("_MaskStrength") - VIGNETTE_MIN) <= .01)
                     vignetteState = VignetteState.LARGE;
             }
-            
+        }
+        else
+        {
+            if (Mathf.Abs(nightVisionMaterial.GetFloat("_MaskStrength") - VIGNETTE_MIN) <= .01)
+                nightVisionMaterial.SetFloat("_MaskStrength", Mathf.Lerp(nightVisionMaterial.GetFloat("_MaskStrength"), VIGNETTE_MIN, .025f));
         }
     }
 
@@ -98,10 +103,6 @@ public class Player : Character
         if(Input.GetKeyDown(KeyCode.E))
         {
             enableVignette = !enableVignette;
-            if(enableVignette == false)
-            {
-                nightVisionMaterial.SetFloat("_MaskStrength", VIGNETTE_MIN);
-            }
         }
     }
 }

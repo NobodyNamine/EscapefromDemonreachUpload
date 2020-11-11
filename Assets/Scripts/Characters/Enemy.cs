@@ -19,7 +19,7 @@ public class Enemy : Character
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        moveSpeed = 5;
+        moveSpeed = 5;        
     }
 
     // Update is called once per frame
