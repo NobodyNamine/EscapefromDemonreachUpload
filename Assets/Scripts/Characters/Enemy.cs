@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : Character
 {
+    public Area areaPatroling;
     private const int NUM_OF_RAYS = 20;
     private const float CONE_DEGREES = 100;
     private const float VISION_DISTANCE = 30;
@@ -24,7 +25,8 @@ public class Enemy : Character
     {
         rigidbody = GetComponent<Rigidbody>();
         meshAgent = GetComponent<NavMeshAgent>();
-        moveSpeed = 5;        
+        moveSpeed = 5;
+        areaPatroling = Area.ALL;
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class Enemy : Character
         }
 
         if (Vector3.Distance(transform.position, path.position) <= .5f)
-            path = path.next;
+            PickNextNode();
     }
 
 
@@ -84,5 +86,13 @@ public class Enemy : Character
         }
     }
 
+
+    protected void PickNextNode()
+    {
+        if (areaPatroling == Area.ALL)
+            path = path.next;
+        else
+            path = path.alternateNext;
+    }
 
 }
