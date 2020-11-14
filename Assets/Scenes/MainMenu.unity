@@ -452,6 +452,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvases
       objectReference: {fileID: 0}
+    - target: {fileID: 5769538043537049428, guid: f836f18881afea64a96a5a89d9db3456,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473714987698122403, guid: f836f18881afea64a96a5a89d9db3456,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6771616180920134279, guid: f836f18881afea64a96a5a89d9db3456,
         type: 3}
       propertyPath: m_textInfo.characterCount
