@@ -5,7 +5,7 @@ using UnityEngine;
 public class Key : Interactable
 {
     [SerializeField]
-    //private Player playerPrefab;
+    GameManager gameManager;
 
     float zRotation;
     const float xRotation = 90f;
@@ -15,6 +15,13 @@ public class Key : Interactable
     protected override void Start()
     {
         zRotation = gameObject.transform.rotation.z;
+
+        // If there is no gameManager set, find the gameManager in the scene
+        if (gameManager == null)
+            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        if (gameManager == null)
+            Debug.LogError("No Game Manager in scene");
     }
 
     // Update is called once per frame
@@ -28,7 +35,7 @@ public class Key : Interactable
         Debug.Log("Key Near");
     }
 
-    // Rotates the key
+    // Rotates the key in a visually pleasing way
     void RotateKey()
     {
         zRotation += rotationSpeed * Time.deltaTime;
@@ -40,9 +47,12 @@ public class Key : Interactable
                 zRotation);
     }
 
+    // Runs every time the player collides with the key
     private void OnTriggerEnter(Collider other)
     {
         //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
+        Destroy(gameObject);
+        gameManager.CollectKey();
         Debug.Log("Near");
     }
 }

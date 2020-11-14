@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     private List<Node> allNodes;
-    int keysAquired;
+    int keysAquired = 0;
 
     void Awake()
     {
@@ -43,6 +43,16 @@ public class GameManager : MonoBehaviour
             {
                 allNodes.Add(nodes[i].GetComponent<Node>());
             }
+        }
+    }
+
+    public void CollectKey()
+    {
+        keysAquired++;
+
+        if (keysAquired >= 3)
+        {
+            Debug.Log("YOU WIN");
         }
     }
 }
