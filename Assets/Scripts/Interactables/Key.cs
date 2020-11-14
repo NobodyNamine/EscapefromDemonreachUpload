@@ -5,29 +5,35 @@ using UnityEngine;
 public class Key : Interactable
 {
     [SerializeField]
-    //private Player playerPrefab;
+    GameManager gameManager;
 
     float zRotation;
     const float xRotation = 90f;
     const float rotationSpeed = 30f;
 
+    bool collide;
+    bool prevFrameCollide;
+
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
         zRotation = gameObject.transform.rotation.z;
+
+        // If there is no gameManager set, find the gameManager in the scene
+        if (gameManager == null)
+            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        if (gameManager == null)
+            Debug.LogError("No Game Manager in scene");
+
+        prevFrameCollide = false;
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
         RotateKey();
     }
-
-    protected override void OnInteraction()
-    {
-        Debug.Log("Key Near");
-    }
-
     // Rotates the key
     void RotateKey()
     {
@@ -39,10 +45,25 @@ public class Key : Interactable
                 gameObject.transform.rotation.y, 
                 zRotation);
     }
-
-    private void OnTriggerEnter(Collider other)
+    protected override void Interaction()
     {
         //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
-        Debug.Log("Near");
+        collide = true;
+
+        if (collide == true && prevFrameCollide == false)
+        {
+            Destroy(gameObject);
+            gameManager.CollectKey();
+            Debug.Log("Near");
+        }
+
+        prevFrameCollide = collide;
+    }
+
+    // Runs every time the player exits collision with the key
+    private void OnTriggerExit(Collider other)
+    {
+        collide = false;
+        prevFrameCollide = false;
     }
 }

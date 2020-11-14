@@ -8,7 +8,19 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     private List<Node> allNodes;
-    int keysAquired;
+
+    private int keysAquired = 0;
+    private const int NUM_OF_KEYS_REQUIRED = 0;
+
+    public int KeysAquired
+    {
+        get { return keysAquired; }
+    }
+
+    public int KeysRequired
+    {
+        get { return NUM_OF_KEYS_REQUIRED; }
+    }
 
     //Turns GameManagers into serial killers who survive scene transistions and murder any other baby GameManagers they encounter
     void Awake()
@@ -44,6 +56,16 @@ public class GameManager : MonoBehaviour
             {
                 allNodes.Add(nodes[i].GetComponent<Node>());
             }
+        }
+    }
+
+    public void CollectKey()
+    {
+        keysAquired++;
+
+        if (keysAquired >= 3)
+        {
+            Debug.Log("YOU WIN");
         }
     }
 }
