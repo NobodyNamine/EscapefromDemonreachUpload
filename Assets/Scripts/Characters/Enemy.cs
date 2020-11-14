@@ -7,8 +7,9 @@ public class Enemy : Character
 {
     public Area areaPatroling;
     private const int NUM_OF_RAYS = 20;
-    private const float CONE_DEGREES = 100;
-    private const float VISION_DISTANCE = 30;
+    private const float CONE_DEGREES = 180;
+    private const float VISION_DISTANCE = 50;
+    private const float MAX_SPEED = 10;
 
     protected bool foundPlayer = false;
     protected Vector3 playerPos;
@@ -33,12 +34,12 @@ public class Enemy : Character
     protected virtual void Update()
     {
         //If we haven't found the player and
-        if(!DetectPlayer() && meshAgent.destination != path.position)
+        if (!DetectPlayer() && meshAgent.destination != path.position)
         {
             meshAgent.SetDestination(path.position);
         }
 
-        if (Vector3.Distance(transform.position, path.position) <= .5f)
+        if (Vector3.Distance(transform.position, path.position) <= 3 && !foundPlayer)
             PickNextNode();
     }
 
@@ -66,11 +67,13 @@ public class Enemy : Character
                 {
                     //SEEK PLAYER HIT
                     meshAgent.SetDestination(potentialPlayer.transform.position);
+                    meshAgent.speed = Mathf.Lerp(meshAgent.speed, MAX_SPEED, .005f);
+                    foundPlayer = true;
                     return true;
                 }
             }
         }
-
+        foundPlayer = false;
         return false;
     }
 
@@ -89,6 +92,7 @@ public class Enemy : Character
 
     protected void PickNextNode()
     {
+        Debug.Log("Here");
         if (areaPatroling == Area.ALL)
             path = path.next;
         else
