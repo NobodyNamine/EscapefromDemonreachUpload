@@ -29,8 +29,6 @@ public class GameManager : MonoBehaviour
             {
                 allNodes.Add(nodes[i].GetComponent<Node>());
             }
-
-
         }
     }
 }
