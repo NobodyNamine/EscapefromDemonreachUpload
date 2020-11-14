@@ -6,8 +6,8 @@ public abstract class Interactable : MonoBehaviour
 {
     protected void OnTriggerEnter(Collider other)
     {
-        Interaction();
+        Interaction(other);
     }
 
-    protected abstract void Interaction();
+    protected abstract void Interaction(Collider other);
 }

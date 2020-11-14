@@ -13,8 +13,11 @@ public class Door : Interactable
         if (gameManager == null)
             Debug.LogError("No Game Manager in scene");
     }
-    protected override void Interaction()
+    protected override void Interaction(Collider other)
     {
+
+        if (!other.GetComponent<Player>())
+            return;
         if (gameManager.KeysAquired >= gameManager.KeysRequired)
             Debug.Log("Near");
     }

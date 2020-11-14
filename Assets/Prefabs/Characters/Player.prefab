@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7114236212248621700}
   - component: {fileID: 7114236210967613604}
   - component: {fileID: 7509796945041031431}
+  - component: {fileID: 9079632224793056389}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -304,7 +305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4798325becf7043986bc9db5a5a61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableVignette: 0
   nightVisionMaterial: {fileID: 2100000, guid: 14e2949e25d05cb42b07646ba0822a6a, type: 2}
 --- !u!65 &7509796945041031431
 BoxCollider:
@@ -319,6 +319,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &9079632224793056389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7114236212246752100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34955793e9e0b4f40b19a70cf83fffac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableVignette: 0
 --- !u!1 &7114236212246752102
 GameObject:
   m_ObjectHideFlags: 0

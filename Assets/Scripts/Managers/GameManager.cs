@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private List<Node> allNodes;
 
     private int keysAquired = 0;
-    private const int NUM_OF_KEYS_REQUIRED = 0;
+    private const int NUM_OF_KEYS_REQUIRED = 1;
 
     public int KeysAquired
     {
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         get { return NUM_OF_KEYS_REQUIRED; }
     }
 
+    //Turns GameManagers into serial killers who survive scene transistions and murder any other baby GameManagers they encounter
     void Awake()
     {
         if (instance != null)
