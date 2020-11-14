@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private List<Node> allNodes;
     int keysAquired;
 
+    //Turns GameManagers into serial killers who survive scene transistions and murder any other baby GameManagers they encounter
     void Awake()
     {
         if (instance != null)
