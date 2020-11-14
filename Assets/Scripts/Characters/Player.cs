@@ -22,7 +22,7 @@ public class Player : Character
     }
 
     //Method used to check for input from the player
-    void ProcessInput()
+    private void ProcessInput()
     {
         //Toggling our shapeshift
         if (InputData.ActionPressed("shapeshift"))
