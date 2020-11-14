@@ -4,20 +4,45 @@ using UnityEngine;
 
 public class Key : Interactable
 {
-    protected override void OnInteraction()
+    [SerializeField]
+    //private Player playerPrefab;
+
+    float zRotation;
+    const float xRotation = 90f;
+    const float rotationSpeed = 30f;
+
+    // Start is called before the first frame update
+    protected override void Start()
     {
-        throw new System.NotImplementedException();
+        zRotation = gameObject.transform.rotation.z;
     }
 
-    //// Start is called before the first frame update
-    //protected override void Start()
-    //{
-        
-    //}
+    // Update is called once per frame
+    protected override void Update()
+    {
+        RotateKey();
+    }
 
-    //// Update is called once per frame
-    //protected override void Update()
-    //{
-        
-    //}
+    protected override void OnInteraction()
+    {
+        Debug.Log("Key Near");
+    }
+
+    // Rotates the key
+    void RotateKey()
+    {
+        zRotation += rotationSpeed * Time.deltaTime;
+
+        gameObject.transform.rotation = 
+            Quaternion.Euler(
+                xRotation, 
+                gameObject.transform.rotation.y, 
+                zRotation);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
+        Debug.Log("Near");
+    }
 }

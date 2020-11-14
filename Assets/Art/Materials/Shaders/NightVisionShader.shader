@@ -64,13 +64,12 @@
 				fixed4 col = tex2D(_MainTex, i.uv);
 				dist -= _MaskStrength;
 				fixed4 mask = fixed4(dist, dist, dist, 1.0);
-				//fixed4 mask = tex2D(_ColorMask, i.uv);
 				float depth = DecodeFloatRG(tex2D(_CameraDepthTexture, i.uv));
 				float linearDepth = Linear01Depth(depth);
 				linearDepth = max(0, (_Range - linearDepth) / _Range);
 			if (_Enabled == 1)
 			{
-				col = _Color * (fixed4(lum(col), lum(col), lum(col), 1) * _ColorMultiplier + linearDepth - (mask * 2));
+				col = _Color * (fixed4(lum(col), lum(col), lum(col), 1) * _ColorMultiplier + linearDepth - (mask * 2) * .1f);
 			}
 			if (mask.x >= 0)
 				return col * linearDepth - mask;

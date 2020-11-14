@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     private List<Node> allNodes;
+    int keysAquired;
 
     void Awake()
     {
