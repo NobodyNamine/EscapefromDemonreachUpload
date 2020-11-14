@@ -5,7 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
+
     private List<Node> allNodes;
+
+    private int keysAquired = 0;
+    private const int NUM_OF_KEYS_REQUIRED = 0;
+
+    public int KeysAquired
+    {
+        get { return keysAquired; }
+    }
+
+    public int KeysRequired
+    {
+        get { return NUM_OF_KEYS_REQUIRED; }
+    }
+
+    void Awake()
+    {
+        if (instance != null)
+            Destroy(gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +55,16 @@ public class GameManager : MonoBehaviour
             {
                 allNodes.Add(nodes[i].GetComponent<Node>());
             }
+        }
+    }
+
+    public void CollectKey()
+    {
+        keysAquired++;
+
+        if (keysAquired >= 3)
+        {
+            Debug.Log("YOU WIN");
         }
     }
 }

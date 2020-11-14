@@ -79,7 +79,7 @@ public class Player : Character
     void ProcessInput()
     {
         //Toggling our shapeshift
-        if (Input.GetKeyDown(KeyCode.F))
+        if (InputData.actionPressed("shapeshift"))
         {
             if (currentState == ShapeShiftState.RAT)
                 currentState = ShapeShiftState.HUMAN;
@@ -87,7 +87,7 @@ public class Player : Character
                 currentState = ShapeShiftState.RAT;
         }
         //Toggling Nightvision
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (InputData.actionPressed("toggleNightVision"))
         {
             if (NightVisionEnabled)
             {
@@ -100,7 +100,7 @@ public class Player : Character
             NightVisionEnabled = !NightVisionEnabled;
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if(InputData.actionPressed("debugEnableVignette"))
         {
             enableVignette = !enableVignette;
         }
