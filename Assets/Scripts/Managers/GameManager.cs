@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InputData.Initialize();
     }
 
     // Update is called once per frame
@@ -29,8 +29,6 @@ public class GameManager : MonoBehaviour
             {
                 allNodes.Add(nodes[i].GetComponent<Node>());
             }
-
-
         }
     }
 }
