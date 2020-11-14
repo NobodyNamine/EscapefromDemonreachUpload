@@ -5,6 +5,8 @@ using UnityEngine;
 public class Key : Interactable
 {
     float zRotation;
+    const float xRotation = 90f;
+    const float rotationSpeed = 30f;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -26,10 +28,12 @@ public class Key : Interactable
     // Rotates the key
     void RotateKey()
     {
-        zRotation += 20f * Time.deltaTime;
+        zRotation += rotationSpeed * Time.deltaTime;
 
-        gameObject.transform.rotation = Quaternion.Euler(90, 
-            gameObject.transform.rotation.y, 
-            zRotation);
+        gameObject.transform.rotation = 
+            Quaternion.Euler(
+                xRotation, 
+                gameObject.transform.rotation.y, 
+                zRotation);
     }
 }
