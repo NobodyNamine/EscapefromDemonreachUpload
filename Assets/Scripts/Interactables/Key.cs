@@ -15,7 +15,7 @@ public class Key : Interactable
     bool prevFrameCollide;
 
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
         zRotation = gameObject.transform.rotation.z;
 
@@ -30,17 +30,11 @@ public class Key : Interactable
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
         RotateKey();
     }
-
-    protected override void OnInteraction()
-    {
-        Debug.Log("Key Near");
-    }
-
-    // Rotates the key in a visually pleasing way
+    // Rotates the key
     void RotateKey()
     {
         zRotation += rotationSpeed * Time.deltaTime;
@@ -51,9 +45,7 @@ public class Key : Interactable
                 gameObject.transform.rotation.y, 
                 zRotation);
     }
-
-    // Runs every time the player collides with the key
-    private void OnTriggerEnter(Collider other)
+    protected override void Interaction()
     {
         //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
         collide = true;

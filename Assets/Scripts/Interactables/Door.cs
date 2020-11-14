@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class Door : Interactable
 {
-    protected override void OnInteraction()
+    private GameManager gameManager;
+    void Start()
     {
-        throw new System.NotImplementedException();
+        if (gameManager == null)
+            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        if (gameManager == null)
+            Debug.LogError("No Game Manager in scene");
     }
-
-    //// Start is called before the first frame update
-    //protected override void Start()
-    //{
-        
-    //}
-
-    //// Update is called once per frame
-    //protected override void Update()
-    //{
-        
-    //}
+    protected override void Interaction()
+    {
+        if (gameManager.KeysAquired >= gameManager.KeysRequired)
+            Debug.Log("Near");
+    }
 }
