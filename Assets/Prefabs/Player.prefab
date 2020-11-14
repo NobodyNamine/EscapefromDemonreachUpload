@@ -203,7 +203,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114236212246752100}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4798325becf7043986bc9db5a5a61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableVignette: 0
   nightVisionMaterial: {fileID: 2100000, guid: 14e2949e25d05cb42b07646ba0822a6a, type: 2}
 --- !u!65 &7509796945041031431
 BoxCollider:
@@ -423,4 +424,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca2bce29a4cbd14bbc8cb281d232c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsMaterial: {fileID: 2100000, guid: 14e2949e25d05cb42b07646ba0822a6a, type: 2}
+  graphicsMaterial: {fileID: 0}
