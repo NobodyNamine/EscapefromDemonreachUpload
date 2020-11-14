@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private List<Node> allNodes;
 
     private int keysAquired = 0;
-    private const int NUM_OF_KEYS_REQUIRED = 0;
+    private const int NUM_OF_KEYS_REQUIRED = 1;
 
     public int KeysAquired
     {

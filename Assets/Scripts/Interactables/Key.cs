@@ -45,8 +45,10 @@ public class Key : Interactable
                 gameObject.transform.rotation.y, 
                 zRotation);
     }
-    protected override void Interaction()
+    protected override void Interaction(Collider other)
     {
+        if (!other.GetComponent<Player>())
+            return;
         //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
         collide = true;
 
