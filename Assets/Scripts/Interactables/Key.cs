@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Key : Interactable
 {
+    [SerializeField]
+    //private Player playerPrefab;
+
     float zRotation;
     const float xRotation = 90f;
     const float rotationSpeed = 30f;
@@ -22,7 +25,7 @@ public class Key : Interactable
 
     protected override void OnInteraction()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Key Near");
     }
 
     // Rotates the key
@@ -35,5 +38,11 @@ public class Key : Interactable
                 xRotation, 
                 gameObject.transform.rotation.y, 
                 zRotation);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
+        Debug.Log("Near");
     }
 }
