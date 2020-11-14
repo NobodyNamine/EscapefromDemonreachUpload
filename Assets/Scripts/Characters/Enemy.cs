@@ -34,12 +34,12 @@ public class Enemy : Character
     protected virtual void Update()
     {
         //If we haven't found the player and
-        if(!DetectPlayer() && meshAgent.destination != path.position)
+        if (!DetectPlayer() && meshAgent.destination != path.position)
         {
             meshAgent.SetDestination(path.position);
         }
 
-        else if (Vector3.Distance(transform.position, path.position) <= 3)
+        if (Vector3.Distance(transform.position, path.position) <= 3 && !foundPlayer)
             PickNextNode();
     }
 
@@ -65,15 +65,15 @@ public class Enemy : Character
             {
                 if(hit.collider.gameObject.TryGetComponent<Player>(out potentialPlayer))
                 {
-                    Debug.Log("Here");
                     //SEEK PLAYER HIT
                     meshAgent.SetDestination(potentialPlayer.transform.position);
                     meshAgent.speed = Mathf.Lerp(meshAgent.speed, MAX_SPEED, .005f);
+                    foundPlayer = true;
                     return true;
                 }
             }
         }
-
+        foundPlayer = false;
         return false;
     }
 
@@ -92,6 +92,7 @@ public class Enemy : Character
 
     protected void PickNextNode()
     {
+        Debug.Log("Here");
         if (areaPatroling == Area.ALL)
             path = path.next;
         else
