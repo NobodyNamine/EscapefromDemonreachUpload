@@ -7,8 +7,9 @@ public class Enemy : Character
 {
     public Area areaPatroling;
     private const int NUM_OF_RAYS = 20;
-    private const float CONE_DEGREES = 100;
-    private const float VISION_DISTANCE = 30;
+    private const float CONE_DEGREES = 180;
+    private const float VISION_DISTANCE = 50;
+    private const float MAX_SPEED = 10;
 
     protected bool foundPlayer = false;
     protected Vector3 playerPos;
@@ -38,7 +39,7 @@ public class Enemy : Character
             meshAgent.SetDestination(path.position);
         }
 
-        if (Vector3.Distance(transform.position, path.position) <= .5f)
+        else if (Vector3.Distance(transform.position, path.position) <= 3)
             PickNextNode();
     }
 
@@ -64,8 +65,10 @@ public class Enemy : Character
             {
                 if(hit.collider.gameObject.TryGetComponent<Player>(out potentialPlayer))
                 {
+                    Debug.Log("Here");
                     //SEEK PLAYER HIT
                     meshAgent.SetDestination(potentialPlayer.transform.position);
+                    meshAgent.speed = Mathf.Lerp(meshAgent.speed, MAX_SPEED, .005f);
                     return true;
                 }
             }
