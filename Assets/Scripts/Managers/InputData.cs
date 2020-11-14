@@ -10,12 +10,14 @@ public static class InputData
     {
         actionInputs = new Dictionary<string, KeyCode>();
 
+        //Add more to this list to configure the names of actions and what keys they are associated with
         actionInputs.Add("shapeshift", KeyCode.F);
         actionInputs.Add("toggleNightVision", KeyCode.Q);
         actionInputs.Add("debugEnableVignette", KeyCode.E);
     }
 
-    public static bool actionPressed(string action)
+    //Call this method whenever you want to check if the input for an action has been pressed
+    public static bool ActionPressed(string action)
     {
         return Input.GetKeyDown(actionInputs[action]);
     }
