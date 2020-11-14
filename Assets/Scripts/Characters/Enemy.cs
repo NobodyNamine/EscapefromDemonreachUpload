@@ -92,7 +92,6 @@ public class Enemy : Character
 
     protected void PickNextNode()
     {
-        Debug.Log("Here");
         if (areaPatroling == Area.ALL)
             path = path.next;
         else
