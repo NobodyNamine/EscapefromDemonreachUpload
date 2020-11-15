@@ -1101,6 +1101,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9079632224793056389, guid: 0707a4ecc8e0c994d8a4d5ab006784e3,
+        type: 3}
+      propertyPath: nightVisionMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 14e2949e25d05cb42b07646ba0822a6a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0707a4ecc8e0c994d8a4d5ab006784e3, type: 3}
 --- !u!1 &1303563783
