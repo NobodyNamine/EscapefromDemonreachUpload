@@ -44,36 +44,45 @@ public class Enemy : Character
     // Update is called once per frame
     protected virtual void Update()
     {
-        //If we haven't found the player and
-        if (!DetectPlayer() && meshAgent.destination != path.position)
-        {
-            meshAgent.SetDestination(path.position);
-        }
-
-        if (Vector3.Distance(transform.position, path.position) <= 3 && !foundPlayer)
-            PickNextNode();
+        //Chasing an invisible player takes priority over everything else so this line gets to be outside the state machine
+        //but there probably shouldn't be too much else out here
+        if (DetectPlayer())
+            currentState = enemyAiState.CHASE;
 
         switch (currentState)
         {
             case enemyAiState.PATROL:
                 //The enemy normally walks around from node to node all over the map, looking for evidence
                 //The enemy starts in this state and comes back to it after giving up after a certain amount of time spent in INVESTIGATE
+                Patrol();
                 break;
 
             case enemyAiState.ALERTED:
                 //The enemy has gained some evidence, such as hearing the player (while in PATROL or INVESTIGATE) or losing sight of the player (while in CHASE)
                 //In this state, the enemy will proceed to node which is closest to the evidence and will switch to INVESTIGATE upon arrival
+
+                //when I arrive at my destination node, find which collection that node beloned to and switch my state to INVESTIGATE
+                //That collection of nodes is the target of my investigation
                 break;
 
             case enemyAiState.CHASE:
                 //The enemy enters this state if they actively see the player during any of the other states
                 //They pursue the player
+
+                //If I lose sight of the player then this happens
+                if (!DetectPlayer())
+                {
+                    currentState = enemyAiState.INVESTIGATE;
+                    //probably need some way to mark a node as "evidence" should be whatever node the player was closest too when they were last seen
+                }
                 break;
 
             case enemyAiState.INVESTIGATE:
                 //The enemy enters this state when they finish ALERTED
                 //They will basically do the same thing they do in patrol, but about a small collection of nodes (which the one ALERTED took them too belongs too)
                 //instead of all nodes on the map
+
+                //After a certain amount of time happens, I will give up with the investigation, then switch my state to PATROL
                 break;
         }
     }
@@ -110,6 +119,19 @@ public class Enemy : Character
         }
         foundPlayer = false;
         return false;
+    }
+    //Should be called during PATROL and INVESTIGATE
+    //The value of the areaPatrolling variable should be the main difference between those states
+    protected void Patrol() 
+    {
+        //If we haven't found the player and
+        if (!DetectPlayer() && meshAgent.destination != path.position)
+        {
+            meshAgent.SetDestination(path.position);
+        }
+
+        if (Vector3.Distance(transform.position, path.position) <= 3 && !foundPlayer)
+            PickNextNode();
     }
 
     void OnDrawGizmos()
