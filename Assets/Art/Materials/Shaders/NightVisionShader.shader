@@ -69,7 +69,7 @@
 				linearDepth = max(0, (_Range - linearDepth) / _Range);
 			if (_Enabled == 1)
 			{
-				col = _Color * (fixed4(lum(col), lum(col), lum(col), 1) * _ColorMultiplier + linearDepth - (mask * 2) * .1f);
+				col = _Color * (fixed4(lum(col), lum(col), lum(col), 1) + linearDepth - (mask * 2) * _ColorMultiplier);
 			}
 			if (mask.x >= 0)
 				return col * linearDepth - mask;

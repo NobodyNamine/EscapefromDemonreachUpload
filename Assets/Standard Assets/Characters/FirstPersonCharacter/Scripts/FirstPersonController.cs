@@ -5,8 +5,6 @@ using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
 
 #pragma warning disable 618, 649
-namespace UnityStandardAssets.Characters.FirstPerson
-{
     [RequireComponent(typeof (CharacterController))]
     [RequireComponent(typeof (AudioSource))]
     public class FirstPersonController : MonoBehaviour
@@ -44,6 +42,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
 
         public bool lockMovement = false;
+
+        public MouseLook MouseLook
+        {
+            get { return m_MouseLook; }
+        }
 
         // Use this for initialization
         private void Start()
@@ -261,4 +264,3 @@ namespace UnityStandardAssets.Characters.FirstPerson
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
     }
-}
