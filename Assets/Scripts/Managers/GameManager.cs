@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum gameState
+{
+    MAINMENU,
+    GAMEPLAY,
+    PAUSE
+}
+
 public class GameManager : MonoBehaviour
 {
+    //Fields
     public static GameManager instance = null;
 
     private List<Node> allNodes;
@@ -12,16 +20,16 @@ public class GameManager : MonoBehaviour
     private int keysAquired = 0;
     private const int NUM_OF_KEYS_REQUIRED = 1;
 
-    public int KeysAquired
-    {
-        get { return keysAquired; }
-    }
+    private gameState currentState;
 
-    public int KeysRequired
-    {
-        get { return NUM_OF_KEYS_REQUIRED; }
-    }
+    //Properties
+    public int KeysAquired { get { return keysAquired; } }
 
+    public int KeysRequired { get { return NUM_OF_KEYS_REQUIRED; } }
+
+    public gameState CurrentState { get { return currentState; } }
+
+    //Methods
     //Turns GameManagers into serial killers who survive scene transistions and murder any other baby GameManagers they encounter
     void Awake()
     {
@@ -38,24 +46,52 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         InputData.Initialize();
+
+        //set the game state
+        currentState = gameState.MAINMENU;
+        //having to always launch from the Main Menu during development would be annoying so OnSceneLoaded accounts for that
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        switch (currentState)
+        {
+            case gameState.MAINMENU:
+                //things happen here probably, offload what you can into UiManager helper methods
+                break;
+
+            case gameState.GAMEPLAY:
+                //things happen here probably, offload what you can into other Manager class helper methods
+                break;
+
+            case gameState.PAUSE:
+                //things happen here probably, offload what you can into UiManager helper methods
+                break;
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name != "StartScene")
-        {
-            GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
+        //This is only here because always starting on the main menu during development would be annoying
+        if (scene.name != "MainMenu")
+            currentState = gameState.GAMEPLAY;
+        //This part above would not be neccesary in a final build
 
-            for(int i = 0; i < nodes.Length; i++)
-            {
-                allNodes.Add(nodes[i].GetComponent<Node>());
-            }
+        switch (currentState)
+        {
+            case gameState.MAINMENU:
+                //idk is there anything we need to do when the Main Menu scene loads but jic
+                break;
+
+            case gameState.GAMEPLAY:
+                GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
+
+                for (int i = 0; i < nodes.Length; i++)
+                {
+                    allNodes.Add(nodes[i].GetComponent<Node>());
+                }
+                break;
         }
     }
 
