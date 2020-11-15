@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum enemyAiState
+{
+    PATROL,
+    ALERTED,
+    CHASE,
+    INVESTIGATE
+}
+
 public class Enemy : Character
 {
     public Area areaPatroling;
@@ -20,6 +28,8 @@ public class Enemy : Character
 
     protected NavMeshAgent meshAgent;
 
+    private enemyAiState currentState;
+
     public Node path;
     // Start is called before the first frame update
     void Start()
@@ -28,6 +38,7 @@ public class Enemy : Character
         meshAgent = GetComponent<NavMeshAgent>();
         moveSpeed = 5;
         areaPatroling = Area.ALL;
+        currentState = enemyAiState.PATROL;
     }
 
     // Update is called once per frame
@@ -41,6 +52,30 @@ public class Enemy : Character
 
         if (Vector3.Distance(transform.position, path.position) <= 3 && !foundPlayer)
             PickNextNode();
+
+        switch (currentState)
+        {
+            case enemyAiState.PATROL:
+                //The enemy normally walks around from node to node all over the map, looking for evidence
+                //The enemy starts in this state and comes back to it after giving up after a certain amount of time spent in INVESTIGATE
+                break;
+
+            case enemyAiState.ALERTED:
+                //The enemy has gained some evidence, such as hearing the player (while in PATROL or INVESTIGATE) or losing sight of the player (while in CHASE)
+                //In this state, the enemy will proceed to node which is closest to the evidence and will switch to INVESTIGATE upon arrival
+                break;
+
+            case enemyAiState.CHASE:
+                //The enemy enters this state if they actively see the player during any of the other states
+                //They pursue the player
+                break;
+
+            case enemyAiState.INVESTIGATE:
+                //The enemy enters this state when they finish ALERTED
+                //They will basically do the same thing they do in patrol, but about a small collection of nodes (which the one ALERTED took them too belongs too)
+                //instead of all nodes on the map
+                break;
+        }
     }
 
 
