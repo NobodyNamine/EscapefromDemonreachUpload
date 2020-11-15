@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-    Abilities abilityData;
+    public Abilities abilityData;
+    [SerializeField]
+    private Canvas loseCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -39,5 +42,22 @@ public class Player : Character
         {
             abilityData.ToggleVignette();
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<Alfred>() || other.GetComponent<Harry>())
+        {
+            UIManager.ForwardCanvas(loseCanvas);
+            //Change game state here
+            GetComponent<FirstPersonController>().enabled = false;
+            GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
+            Cursor.visible = true;
+        }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
