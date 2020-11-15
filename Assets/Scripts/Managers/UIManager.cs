@@ -1,18 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private static Stack<Canvas> canvasTracker;
+
     void Start()
     {
-        
+        canvasTracker = new Stack<Canvas>();
+    }
+    public static void ForwardCanvas(Canvas canvasToAdd)
+    {
+        if(canvasTracker.Count > 0)
+            canvasTracker.Peek().gameObject.SetActive(false);
+        canvasTracker.Push(canvasToAdd);
+        canvasTracker.Peek().gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void BackButton()
     {
-        
+        canvasTracker.Peek().gameObject.SetActive(false);
+        canvasTracker.Pop();
+        canvasTracker.Peek().gameObject.SetActive(true);
     }
+
 }
