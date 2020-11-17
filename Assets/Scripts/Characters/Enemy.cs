@@ -146,7 +146,6 @@ public class Enemy : Character
         }
     }
 
-
     protected void PickNextNode()
     {
         if (areaPatroling == Area.ALL)
@@ -154,5 +153,4 @@ public class Enemy : Character
         else
             path = path.alternateNext;
     }
-
 }
