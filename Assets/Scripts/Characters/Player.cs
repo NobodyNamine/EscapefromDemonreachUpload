@@ -88,7 +88,7 @@ public class Player : Character
     {
         Vector3 targetDir = alfred.transform.position - gameObject.transform.position;
         float angle = Vector3.Angle(targetDir, gameObject.transform.forward);
-        Debug.Log(angle);
+        //Debug.Log(angle);
         return angle;
     }
 
@@ -119,11 +119,11 @@ public class Player : Character
 
         if (detected)
         {
-            Debug.Log("Wall Detected");
+            //Debug.Log("Wall Detected");
             return false;
         }
 
-        Debug.Log("No Wall Detected");
+        //Debug.Log("No Wall Detected");
         return true;
     }
 
