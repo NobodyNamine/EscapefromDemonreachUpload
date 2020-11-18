@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     //Fields
     public static GameManager instance = null;
 
-    private List<Node> allNodes;
+    public List<Node> allNodes;
 
     private int keysAquired = 0;
     private const int NUM_OF_KEYS_REQUIRED = 5;
