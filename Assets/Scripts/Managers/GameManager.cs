@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     //Turns GameManagers into serial killers who survive scene transistions and murder any other baby GameManagers they encounter
     void Awake()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         if (instance != null)
             Destroy(gameObject);
         else
