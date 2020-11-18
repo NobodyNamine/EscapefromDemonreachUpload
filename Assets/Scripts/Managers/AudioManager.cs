@@ -30,15 +30,16 @@ public class AudioManager : MonoBehaviour
         ambience = FMODUnity.RuntimeManager.CreateInstance("event:/Ambience/EFD_Ambience");
         chaseCloser = FMODUnity.RuntimeManager.CreateInstance("event:/Music/ChaseCloser");
         chaseFarther = FMODUnity.RuntimeManager.CreateInstance("event:/Music/ChaseFarther");
+
+        //chaseCloser.start();
     }
 
-
-    void PlayChase()
+    public void PlayChase()
     {
         chaseCloser.start();
     }
 
-    void StopChase()
+    public void StopChase()
     {
         chaseCloser.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }

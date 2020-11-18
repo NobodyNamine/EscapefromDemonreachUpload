@@ -42,6 +42,7 @@ public class Enemy : Character
         areaPatroling = Area.ALL;
         currentState = enemyAiState.PATROL;
         meshAgent.SetDestination(path.position);
+        FindAudioManager();
         //StartCoroutine("Step");
     }
 
@@ -52,7 +53,19 @@ public class Enemy : Character
         //but there probably shouldn't be too much else out here
         detectPlayerResults = DetectPlayer();
         if (detectPlayerResults)
+        {
+            Debug.Log("CHASING");
+
+            // If the enemy has found the player before entering chase state, start playing the chase music
+            if (!foundPlayer)
+                audioManager.PlayChase();
+
+            // enemy has found player
+            foundPlayer = true;
+
             currentState = enemyAiState.CHASE;
+        }
+
         switch (currentState)
         {
             case enemyAiState.PATROL:
@@ -74,9 +87,17 @@ public class Enemy : Character
                 //They pursue the player
 
                 //If I lose sight of the player then this happens
-                if (!detectPlayerResults && Vector3.Distance(transform.position, meshAgent.destination) <= 2)
+                if (!detectPlayerResults && Vector3.Distance(transform.position, meshAgent.destination) <= 1)
                 {
-                    Debug.Log("Here");
+                    Debug.Log("Lost Player");
+
+                    // If the enemy had found the player before going into investigate, stop playing hte chase music
+                    if (foundPlayer)
+                        audioManager.StopChase();
+
+                    // the enemy has not found the player
+                    foundPlayer = false;
+
                     currentState = enemyAiState.INVESTIGATE;
                     areaPatroling = Area.SPECIFIC;
 
@@ -84,6 +105,7 @@ public class Enemy : Character
                     FindClosestNode();
                     //probably need some way to mark a node as "evidence" should be whatever node the player was closest too when they were last seen
                 }
+
                 break;
 
             case enemyAiState.INVESTIGATE:
@@ -133,6 +155,7 @@ public class Enemy : Character
                     meshAgent.SetDestination(potentialPlayer.transform.position);
                     meshAgent.speed = Mathf.Lerp(meshAgent.speed, MAX_SPEED, .005f);
                     currentState = enemyAiState.CHASE;
+
                     return true;
                 }
             }
@@ -143,6 +166,8 @@ public class Enemy : Character
     //The value of the areaPatrolling variable should be the main difference between those states
     protected void Patrol() 
     {
+        //audioManager.StopChase();
+
         //Check if we reached our next node
         if (Vector3.Distance(transform.position, path.position) <= 3)
         {
