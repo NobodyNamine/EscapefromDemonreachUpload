@@ -33,9 +33,14 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    void PlaySoundInstance()
-    { 
-    
+    void PlayChase()
+    {
+        chaseCloser.start();
+    }
+
+    void StopChase()
+    {
+        chaseCloser.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     public void PlayOneShot(string FMODfilePath)

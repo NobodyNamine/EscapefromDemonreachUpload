@@ -23,7 +23,6 @@ public class UIManager : MonoBehaviour
     }
     public void ForwardCanvas(Canvas canvasToAdd)
     {
-        Debug.Log(canvasTracker.Count);
         if(canvasTracker.Count > 0)
             canvasTracker.Peek().gameObject.SetActive(false);
         canvasTracker.Push(canvasToAdd);

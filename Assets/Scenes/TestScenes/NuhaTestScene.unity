@@ -255,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 449056, guid: 47121ae891ef7614c9f45ce4b4f8fcd6, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 449056, guid: 47121ae891ef7614c9f45ce4b4f8fcd6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -579,6 +579,131 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198181104141240334, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198181104141240334, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198181104141240334, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.7169812
+      objectReference: {fileID: 0}
+    - target: {fileID: 198181104141240334, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.030930009
+      objectReference: {fileID: 0}
+    - target: {fileID: 198181104141240334, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: UVModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198279495855881254, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198279495855881254, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.67058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 198279495855881254, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.13502917
+      objectReference: {fileID: 0}
+    - target: {fileID: 198279495855881254, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: SubModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198313640795591846, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.13185342
+      objectReference: {fileID: 0}
+    - target: {fileID: 198313640795591846, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.5283019
+      objectReference: {fileID: 0}
+    - target: {fileID: 198313640795591846, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198313640795591846, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198313640795591846, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: ColorBySpeedModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198313640795591846, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: SubModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198715319605565730, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198715319605565730, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198715319605565730, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.018223286
+      objectReference: {fileID: 0}
+    - target: {fileID: 198715319605565730, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198715319605565730, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: ColorBySpeedModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198984605744382370, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.014239941
+      objectReference: {fileID: 0}
+    - target: {fileID: 198984605744382370, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6037736
+      objectReference: {fileID: 0}
+    - target: {fileID: 198984605744382370, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.04347976
+      objectReference: {fileID: 0}
+    - target: {fileID: 198984605744382370, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198984605744382370, guid: 2a2762eb559a5e24cb94e81034b36a34,
+        type: 3}
+      propertyPath: ColorBySpeedModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a2762eb559a5e24cb94e81034b36a34, type: 3}
 --- !u!1001 &1951516845
@@ -622,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 449056, guid: acfea269b5aec3142aeec88a60895c02, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 449056, guid: acfea269b5aec3142aeec88a60895c02, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
