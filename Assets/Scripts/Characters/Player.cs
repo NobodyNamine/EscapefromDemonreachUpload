@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-    public Abilities abilityData;
+    private Abilities abilityData;
     [SerializeField]
     private Canvas loseCanvas;
     private GameManager gameManager;

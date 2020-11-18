@@ -23,8 +23,10 @@ public class Abilities : MonoBehaviour
 
     private bool NightVisionEnabled = false;
     [SerializeField] private Material nightVisionMaterial;
-    [SerializeField] private const float nvDefaultTime = 3f;
-    private float nightVisionTimer = nvDefaultTime;
+    [SerializeField] private float nvActiveTime = 3f;
+    [SerializeField] private float nvCoolDownTime = 15f;
+    [SerializeField] private float nightVisionTimer;
+    private bool nvCoolDown = false;
     
 
     private const float RAT_SCALE = .1f;
@@ -33,7 +35,7 @@ public class Abilities : MonoBehaviour
     private const float VIGNETTE_MIN = .6f;
     private const float speedOfTransformation = 0.8f;
 
-    public FirstPersonController FPSRef;
+    private FirstPersonController FPSRef;
     private float humanWalkSpeed;
     private float humanRunSpeed;
     [SerializeField] private float ratSpeedScale = 0.5f;
@@ -43,6 +45,7 @@ public class Abilities : MonoBehaviour
         currentState = ShapeShiftState.HUMAN;
         vignetteState = VignetteState.SMALL;
         nightVisionMaterial.SetFloat("_MaskStrength", VIGNETTE_MIN);
+        nightVisionTimer = nvActiveTime;
 
         FPSRef = gameObject.GetComponent<FirstPersonController>();
         humanWalkSpeed = FPSRef.m_WalkSpeed;
@@ -51,12 +54,7 @@ public class Abilities : MonoBehaviour
 
     void Update()
     {
-        if (NightVisionEnabled)
-        {
-            nightVisionTimer -= Time.deltaTime;
-            if (nightVisionTimer <= 0)
-                ToggleNightVision();
-        }
+        NightVisionUpdate();
     }
 
     public void ToggleShapeShiftState()
@@ -89,16 +87,18 @@ public class Abilities : MonoBehaviour
 
     public void ToggleNightVision()
     {
-        nightVisionTimer = nvDefaultTime;
         if (NightVisionEnabled)
         {
             nightVisionMaterial.SetFloat("_Enabled", 0);
+            NightVisionEnabled = false;
+            nightVisionTimer = nvCoolDownTime;
         }
-        else
+        else if(!nvCoolDown)
         {
             nightVisionMaterial.SetFloat("_Enabled", 1);
+            NightVisionEnabled = true;
+            nightVisionTimer = nvActiveTime;
         }
-        NightVisionEnabled = !NightVisionEnabled;
     }
 
     public void ToggleVignette()
@@ -127,6 +127,24 @@ public class Abilities : MonoBehaviour
         {
             if (Mathf.Abs(nightVisionMaterial.GetFloat("_MaskStrength") - VIGNETTE_MIN) <= .01)
                 nightVisionMaterial.SetFloat("_MaskStrength", Mathf.Lerp(nightVisionMaterial.GetFloat("_MaskStrength"), VIGNETTE_MIN, .025f));
+        }
+    }
+
+    private void NightVisionUpdate()
+    {
+        if (NightVisionEnabled || nvCoolDown)
+        {
+            nightVisionTimer -= Time.deltaTime;
+            if (nightVisionTimer <= 0)
+            {
+                if (NightVisionEnabled)
+                {
+                    nvCoolDown = true;
+                    ToggleNightVision();
+                }
+                else if (nvCoolDown)
+                    nvCoolDown = false;
+            }
         }
     }
 
