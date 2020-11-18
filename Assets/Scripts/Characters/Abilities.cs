@@ -23,6 +23,9 @@ public class Abilities : MonoBehaviour
 
     private bool NightVisionEnabled = false;
     [SerializeField] private Material nightVisionMaterial;
+    [SerializeField] private const float nvDefaultTime = 3f;
+    private float nightVisionTimer = nvDefaultTime;
+    
 
     private const float RAT_SCALE = .1f;
     private const float HUMAN_SCALE = 1f;
@@ -44,6 +47,16 @@ public class Abilities : MonoBehaviour
         FPSRef = gameObject.GetComponent<FirstPersonController>();
         humanWalkSpeed = FPSRef.m_WalkSpeed;
         humanRunSpeed = FPSRef.m_RunSpeed;
+    }
+
+    void Update()
+    {
+        if (NightVisionEnabled)
+        {
+            nightVisionTimer -= Time.deltaTime;
+            if (nightVisionTimer <= 0)
+                ToggleNightVision();
+        }
     }
 
     public void ToggleShapeShiftState()
@@ -76,6 +89,7 @@ public class Abilities : MonoBehaviour
 
     public void ToggleNightVision()
     {
+        nightVisionTimer = nvDefaultTime;
         if (NightVisionEnabled)
         {
             nightVisionMaterial.SetFloat("_Enabled", 0);
