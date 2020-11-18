@@ -24,9 +24,7 @@ public class GameManager : MonoBehaviour
 
     //Properties
     public int KeysAquired { get { return keysAquired; } }
-
     public int KeysRequired { get { return NUM_OF_KEYS_REQUIRED; } }
-
     public gameState CurrentState { get { return currentState; } }
 
     //Methods
@@ -99,9 +97,14 @@ public class GameManager : MonoBehaviour
     {
         keysAquired++;
 
-        if (keysAquired >= 3)
+        if (keysAquired == KeysRequired)
         {
-            Debug.Log("YOU WIN");
+            Debug.Log("ALL KEYS AQUIRED");
         }
+    }
+
+    public void SwitchToScene(int sceneNumber)
+    {
+        SceneManager.LoadScene(sceneNumber);
     }
 }

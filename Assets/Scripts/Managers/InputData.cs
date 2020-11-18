@@ -14,6 +14,7 @@ public static class InputData
         actionInputs.Add("shapeshift", KeyCode.F);
         actionInputs.Add("toggleNightVision", KeyCode.Q);
         actionInputs.Add("debugEnableVignette", KeyCode.E);
+        actionInputs.Add("doorEscape", KeyCode.R);
     }
 
     //Call this method whenever you want to check if the input for an action has been pressed

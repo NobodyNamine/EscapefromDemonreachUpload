@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : Interactable
 {
     private GameManager gameManager;
+
     void Start()
     {
         if (gameManager == null)
@@ -13,12 +14,18 @@ public class Door : Interactable
         if (gameManager == null)
             Debug.LogError("No Game Manager in scene");
     }
+
     protected override void Interaction(Collider other)
     {
 
+        Debug.Log("In Rnage");
+
         if (!other.GetComponent<Player>())
             return;
+
         if (gameManager.KeysAquired >= gameManager.KeysRequired)
-            Debug.Log("Near");
+        {
+            gameManager.SwitchToScene(0);
+        }
     }
 }
