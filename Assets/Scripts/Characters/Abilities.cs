@@ -22,8 +22,7 @@ public class Abilities : MonoBehaviour
     private VignetteState vignetteState;
 
     private bool NightVisionEnabled = false;
-    [SerializeField]
-    private Material nightVisionMaterial;
+    [SerializeField] private Material nightVisionMaterial;
 
     private const float RAT_SCALE = .1f;
     private const float HUMAN_SCALE = 1f;
@@ -31,11 +30,20 @@ public class Abilities : MonoBehaviour
     private const float VIGNETTE_MIN = .6f;
     private const float speedOfTransformation = 0.8f;
 
+    public FirstPersonController FPSRef;
+    private float humanWalkSpeed;
+    private float humanRunSpeed;
+    [SerializeField] private float ratSpeedScale = 0.5f;
+
     void Start()
     {
         currentState = ShapeShiftState.HUMAN;
         vignetteState = VignetteState.SMALL;
         nightVisionMaterial.SetFloat("_MaskStrength", VIGNETTE_MIN);
+
+        FPSRef = gameObject.GetComponent<FirstPersonController>();
+        humanWalkSpeed = FPSRef.m_WalkSpeed;
+        humanRunSpeed = FPSRef.m_RunSpeed;
     }
 
     public void ToggleShapeShiftState()
@@ -53,6 +61,17 @@ public class Abilities : MonoBehaviour
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, RAT_SCALE, 1), speedOfTransformation);
         else if (currentState == ShapeShiftState.HUMAN && transform.localScale.y <= HUMAN_SCALE - .01f)
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, HUMAN_SCALE, 1), speedOfTransformation);
+
+        if (currentState == ShapeShiftState.RAT)
+        {
+            FPSRef.m_WalkSpeed = humanWalkSpeed * ratSpeedScale;
+            FPSRef.m_RunSpeed = humanRunSpeed * ratSpeedScale;
+        }
+        else
+        {
+            FPSRef.m_WalkSpeed = humanWalkSpeed;
+            FPSRef.m_RunSpeed = humanRunSpeed;
+        }
     }
 
     public void ToggleNightVision()
