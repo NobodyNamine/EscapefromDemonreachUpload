@@ -17,7 +17,7 @@ public class Enemy : Character
     private float timer = 0;
     private const int NUM_OF_RAYS = 20;
     private const float CONE_DEGREES = 180;
-    private const float VISION_DISTANCE = 50;
+    private const float VISION_DISTANCE = 20;
     private const float MAX_SPEED = 10;
 
     protected bool foundPlayer = false;
@@ -41,7 +41,7 @@ public class Enemy : Character
         moveSpeed = 5;
         areaPatroling = Area.ALL;
         currentState = enemyAiState.PATROL;
-
+        meshAgent.SetDestination(path.position);
         //StartCoroutine("Step");
     }
 
@@ -53,7 +53,6 @@ public class Enemy : Character
         detectPlayerResults = DetectPlayer();
         if (detectPlayerResults)
             currentState = enemyAiState.CHASE;
-
         switch (currentState)
         {
             case enemyAiState.PATROL:
@@ -77,6 +76,7 @@ public class Enemy : Character
                 //If I lose sight of the player then this happens
                 if (!detectPlayerResults && Vector3.Distance(transform.position, meshAgent.destination) <= 2)
                 {
+                    Debug.Log("Here");
                     currentState = enemyAiState.INVESTIGATE;
                     areaPatroling = Area.SPECIFIC;
 
@@ -99,6 +99,7 @@ public class Enemy : Character
                 {
                     areaPatroling = Area.ALL;
                     currentState = enemyAiState.PATROL;
+                    timer = 0;
                 }
                 break;
         }
@@ -115,7 +116,7 @@ public class Enemy : Character
         for(int i = 0; i < NUM_OF_RAYS; i++)
         {
             //Calculating direction of the ray
-            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), transform.position.y + 0.1f
+            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), transform.position.y + 0.2f
                 , Mathf.Cos((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
             RaycastHit hit;
             Player potentialPlayer;
@@ -143,8 +144,11 @@ public class Enemy : Character
     protected void Patrol() 
     {
         //Check if we reached our next node
-        if (Vector3.Distance(transform.position, path.position) <= 3 && !foundPlayer)
+        if (Vector3.Distance(transform.position, path.position) <= 3)
+        {
             PickNextNode();
+            Debug.Log("Here");
+        }
     }
 
     void OnDrawGizmos()
@@ -155,7 +159,7 @@ public class Enemy : Character
             Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), transform.position.y + .1f
                 , Mathf.Cos((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
 
-            Gizmos.DrawLine(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(transform.position.x, 0, transform.position.z) + rayDir * VISION_DISTANCE);
+            Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y + .1f, transform.position.z), new Vector3(transform.position.x, transform.position.y + .1f, transform.position.z) + rayDir * VISION_DISTANCE);
         }
     }
 
@@ -165,6 +169,8 @@ public class Enemy : Character
             path = path.next;
         else
             path = path.alternateNext;
+
+        meshAgent.SetDestination(path.position);
     }
 
     protected void FindClosestNode()
@@ -183,9 +189,11 @@ public class Enemy : Character
             }
         }
         if (areaPatroling == Area.ALL)
-            path = GameManager.instance.allNodes[index].next;
+            path = GameManager.instance.allNodes[index];
         else
-            path = GameManager.instance.allNodes[index].alternateNext;
+            path = GameManager.instance.allNodes[index];
+
+        meshAgent.SetDestination(path.position);
     }
 
     //IEnumerator Step()
