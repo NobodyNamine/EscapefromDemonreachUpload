@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private FMOD.Studio.EventInstance ambience = ;
+    private FMOD.Studio.EventInstance chaseCloser;
+    private FMOD.Studio.EventInstance chaseFarther;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
         
     }
