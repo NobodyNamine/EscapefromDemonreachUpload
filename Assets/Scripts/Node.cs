@@ -4,9 +4,7 @@ using UnityEngine;
 
 public enum Area
 {
-    TOP, 
-    LEFT,
-    RIGHT,
+    SPECIFIC,
     ALL
 }
 public class Node : MonoBehaviour
