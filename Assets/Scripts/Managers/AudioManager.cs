@@ -7,6 +7,10 @@ public class AudioManager : MonoBehaviour
     //Fields
     public static AudioManager instance = null;
 
+    private FMOD.Studio.EventInstance ambience;
+    private FMOD.Studio.EventInstance chaseCloser;
+    private FMOD.Studio.EventInstance chaseFarther;
+
     //Methods
     //Turns AudioManagers into serial killers who survive scene transistions and murder any other baby GameManagers they encounter
     void Awake()
@@ -21,14 +25,6 @@ public class AudioManager : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    {
-        
-    }
-    private FMOD.Studio.EventInstance ambience = ;
-    private FMOD.Studio.EventInstance chaseCloser;
-    private FMOD.Studio.EventInstance chaseFarther;
-
-    private void Start()
     {
         
     }
