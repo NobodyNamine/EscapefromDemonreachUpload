@@ -188,10 +188,10 @@ public class Enemy : Character
             path = GameManager.instance.allNodes[index].alternateNext;
     }
 
-    IEnumerator Step()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Enemy/Genius Loci/Footsteps/LociFootstep");
+    //IEnumerator Step()
+    //{
+    //    FMODUnity.RuntimeManager.PlayOneShot("event:/Enemy/Genius Loci/Footsteps/LociFootstep");
 
-        yield return null;
-    }
+    //    yield return null;
+    //}
 }
