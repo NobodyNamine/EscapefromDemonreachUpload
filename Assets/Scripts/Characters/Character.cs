@@ -4,16 +4,14 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
+    protected AudioManager audioManager;
 
-    void Start()
+    protected void FindAudioManager()
     {
-        
-    }
+        if (audioManager == null)
+            audioManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (audioManager == null)
+            Debug.LogError("No audioManager in scene");
     }
 }

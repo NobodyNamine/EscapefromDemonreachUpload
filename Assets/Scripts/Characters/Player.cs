@@ -9,7 +9,6 @@ public class Player : Character
     [SerializeField]
     private Canvas loseCanvas;
     private GameManager gameManager;
-    private AudioManager audioManager;
     private Enemy alfred;
 
     private bool spottedAlfred;
@@ -80,15 +79,6 @@ public class Player : Character
             Debug.LogError("No Game Manager in scene");
     }
 
-    private void FindAudioManager()
-    {
-        if (audioManager == null)
-            audioManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
-
-        if (audioManager == null)
-            Debug.LogError("No audioManager in scene");
-    }
-
     private float CheckDistanceToEnemy()
     {
         return Vector3.Distance(gameObject.transform.position, alfred.transform.position);
@@ -96,28 +86,52 @@ public class Player : Character
 
     private float CheckAngleToEnemy()
     {
-        return Vector3.Angle(gameObject.transform.forward, alfred.transform.position);
+        Vector3 targetDir = alfred.transform.position - gameObject.transform.position;
+        float angle = Vector3.Angle(targetDir, gameObject.transform.forward);
+        //Debug.Log(angle);
+        return angle;
     }
 
     private void PlayStinger()
     {
-        if (CheckDistanceToEnemy() < 30)
+        if (CheckDistanceToEnemy() < 60)
         { 
-            if (CheckAngleToEnemy() < 10)
+            if (CheckAngleToEnemy() < 20)
             {
-                if (!spottedAlfred)
+                if (CheckForWall())
                 {
-                    audioManager.PlayOneShot("event:/Music/SpottedStinger");
-                    spottedAlfred = true;
+                    if (!spottedAlfred)
+                    {
+                        audioManager.PlayOneShot("event:/Music/SpottedStinger");
+                        spottedAlfred = true;
+                    }
                 }
             }
         }
+    }
+
+    private bool CheckForWall()
+    {
+        //Shooting out a raycast in that direction
+        //RaycastHit hit;
+        int layerMask = 1 << 9;
+        bool detected = Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), gameObject.transform.forward, CheckDistanceToEnemy(), layerMask);
+
+        if (detected)
+        {
+            //Debug.Log("Wall Detected");
+            return false;
+        }
+
+        //Debug.Log("No Wall Detected");
+        return true;
     }
 
     private void AwayFromEnemy() 
     {
         if (CheckDistanceToEnemy() > 60)
         {
+            Debug.Log("No More Alfred");
             spottedAlfred = false;
         }
     }
