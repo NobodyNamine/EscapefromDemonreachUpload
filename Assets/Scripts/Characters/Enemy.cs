@@ -157,6 +157,27 @@ public class Enemy : Character
             path = path.alternateNext;
     }
 
+    protected void FindClosestNode()
+    {
+        //Finds the closest node and sets that to our path
+        int index = 0;
+        float shortestDistance = Vector3.Distance(GameManager.instance.allNodes[0].position, transform.position);
+        float currentDistance = shortestDistance;
+        for(int i = 1; i < GameManager.instance.allNodes.Count; i++)
+        {
+            currentDistance = Vector3.Distance(GameManager.instance.allNodes[i].position, transform.position);
+            if(currentDistance < shortestDistance)
+            {
+                shortestDistance = currentDistance;
+                index = i;
+            }
+        }
+        if (areaPatroling == Area.ALL)
+            path = GameManager.instance.allNodes[index].next;
+        else
+            path = GameManager.instance.allNodes[index].alternateNext;
+    }
+
     IEnumerator Step()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Enemy/Genius Loci/Footsteps/LociFootstep");
