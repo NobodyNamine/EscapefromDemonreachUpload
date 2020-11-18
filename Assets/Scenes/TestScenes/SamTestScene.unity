@@ -1866,21 +1866,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3569480744355898784, guid: 711db495b21c84e48b185ecb05d1335b,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3569480744355898785, guid: 711db495b21c84e48b185ecb05d1335b,
         type: 3}
       propertyPath: path
       value: 
       objectReference: {fileID: 449215056}
-    - target: {fileID: 3569480744355898786, guid: 711db495b21c84e48b185ecb05d1335b,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 84
-      objectReference: {fileID: 0}
     - target: {fileID: 3569480744355898787, guid: 711db495b21c84e48b185ecb05d1335b,
         type: 3}
       propertyPath: m_Name
@@ -1939,16 +1929,6 @@ PrefabInstance:
     - target: {fileID: 3569480744355898789, guid: 711db495b21c84e48b185ecb05d1335b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4936303852108468716, guid: 711db495b21c84e48b185ecb05d1335b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5429434438997723600, guid: 711db495b21c84e48b185ecb05d1335b,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
