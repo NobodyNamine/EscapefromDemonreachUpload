@@ -8,11 +8,13 @@ public class Player : Character
     public Abilities abilityData;
     [SerializeField]
     private Canvas loseCanvas;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         abilityData = gameObject.GetComponent<Abilities>();
+        FindGameManager();
     }
 
     // Update is called once per frame
@@ -59,5 +61,14 @@ public class Player : Character
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void FindGameManager()
+    {
+        if (gameManager == null)
+            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        if (gameManager == null)
+            Debug.LogError("No Game Manager in scene");
     }
 }
