@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 6247230354335654885}
   m_Layer: 0
   m_Name: Alfred
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     private FMOD.Studio.EventInstance chaseFarther;
 
     //Methods
-    //Turns AudioManagers into serial killers who survive scene transistions and murder any other baby GameManagers they encounter
+    //Turns AudioManagers into serial killers who survive scene transistions and murder any other baby AudioManagers they encounter
     void Awake()
     {
         if (instance != null)
@@ -23,9 +23,23 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(instance);
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ambience = FMODUnity.RuntimeManager.CreateInstance("event:/Ambience/EFD_Ambience");
+        chaseCloser = FMODUnity.RuntimeManager.CreateInstance("event:/Music/ChaseCloser");
+        chaseFarther = FMODUnity.RuntimeManager.CreateInstance("event:/Music/ChaseFarther");
+    }
+
+
+    void PlaySoundInstance()
+    { 
+    
+    }
+
+    public void PlayOneShot(string FMODfilePath)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(FMODfilePath);
     }
 }
