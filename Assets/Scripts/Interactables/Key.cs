@@ -11,9 +11,6 @@ public class Key : Interactable
     const float xRotation = 90f;
     const float rotationSpeed = 30f;
 
-    bool collide;
-    bool prevFrameCollide;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +22,6 @@ public class Key : Interactable
 
         if (gameManager == null)
             Debug.LogError("No Game Manager in scene");
-
-        prevFrameCollide = false;
     }
 
     // Update is called once per frame
@@ -39,10 +34,10 @@ public class Key : Interactable
     {
         zRotation += rotationSpeed * Time.deltaTime;
 
-        gameObject.transform.rotation = 
+        gameObject.transform.rotation =
             Quaternion.Euler(
-                xRotation, 
-                gameObject.transform.rotation.y, 
+                xRotation,
+                gameObject.transform.rotation.y,
                 zRotation);
     }
     protected override void Interaction(Collider other)
@@ -50,22 +45,7 @@ public class Key : Interactable
         if (!other.GetComponent<Player>())
             return;
         //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
-        collide = true;
-
-        if (collide == true && prevFrameCollide == false)
-        {
-            Destroy(gameObject);
-            gameManager.CollectKey();
-            Debug.Log("Near");
-        }
-
-        prevFrameCollide = collide;
-    }
-
-    // Runs every time the player exits collision with the key
-    private void OnTriggerExit(Collider other)
-    {
-        collide = false;
-        prevFrameCollide = false;
+        Destroy(gameObject);
+        gameManager.CollectKey();
     }
 }
