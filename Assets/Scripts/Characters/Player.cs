@@ -50,19 +50,17 @@ public class Player : Character
     {
         if(other.GetComponent<Alfred>() != null || other.GetComponent<Harry>() != null)
         {
-            //UIManager.ForwardCanvas(loseCanvas);
-            ////Change game state here
-            //GetComponent<FirstPersonController>().enabled = false;
-            //GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
+            UIManager.instance.ForwardCanvas(loseCanvas);
+            //Change game state here
+            GetComponent<FirstPersonController>().enabled = false;
+            GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
             Cursor.visible = true;
-
-            gameManager.SwitchToScene(0);
         }
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameManager.SwitchToScene(0);
     }
 
     private void FindGameManager()

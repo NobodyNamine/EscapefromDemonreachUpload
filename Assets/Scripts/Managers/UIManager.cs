@@ -5,25 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    private static Stack<Canvas> canvasTracker;
+    public Stack<Canvas> canvasTracker = new Stack<Canvas>();
+    public static UIManager instance = null;
 
     void Start()
     {
-        canvasTracker = new Stack<Canvas>();
+        if (instance != null)
+        {
+            instance.canvasTracker.Clear();
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this);
+            instance = this;
+        }
     }
-    public static void ForwardCanvas(Canvas canvasToAdd)
+    public void ForwardCanvas(Canvas canvasToAdd)
     {
+        Debug.Log(canvasTracker.Count);
         if(canvasTracker.Count > 0)
             canvasTracker.Peek().gameObject.SetActive(false);
         canvasTracker.Push(canvasToAdd);
         canvasTracker.Peek().gameObject.SetActive(true);
     }
 
-    public static void BackButton()
+    public void BackButton()
     {
         canvasTracker.Peek().gameObject.SetActive(false);
         canvasTracker.Pop();
         canvasTracker.Peek().gameObject.SetActive(true);
     }
-
 }
