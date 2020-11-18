@@ -39,6 +39,8 @@ public class Enemy : Character
         moveSpeed = 5;
         areaPatroling = Area.ALL;
         currentState = enemyAiState.PATROL;
+
+        //StartCoroutine("Step");
     }
 
     // Update is called once per frame
@@ -105,6 +107,7 @@ public class Enemy : Character
 
             //Shooting out a raycast in that direction
             bool detected = Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), rayDir, out hit, VISION_DISTANCE, layerMask);
+
             if(detected)
             {
                 if(hit.collider.gameObject.TryGetComponent<Player>(out potentialPlayer))
@@ -152,5 +155,12 @@ public class Enemy : Character
             path = path.next;
         else
             path = path.alternateNext;
+    }
+
+    IEnumerator Step()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Enemy/Genius Loci/Footsteps/LociFootstep");
+
+        yield return null;
     }
 }

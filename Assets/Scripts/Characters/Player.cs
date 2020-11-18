@@ -48,13 +48,15 @@ public class Player : Character
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Alfred>() || other.GetComponent<Harry>())
+        if(other.GetComponent<Alfred>() != null || other.GetComponent<Harry>() != null)
         {
-            UIManager.ForwardCanvas(loseCanvas);
-            //Change game state here
-            GetComponent<FirstPersonController>().enabled = false;
-            GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
+            //UIManager.ForwardCanvas(loseCanvas);
+            ////Change game state here
+            //GetComponent<FirstPersonController>().enabled = false;
+            //GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
             Cursor.visible = true;
+
+            gameManager.SwitchToScene(0);
         }
     }
 
