@@ -25,7 +25,7 @@ public class Abilities : MonoBehaviour
     [SerializeField] private Material nightVisionMaterial;
     [SerializeField] private float nvActiveTime = 3f;
     [SerializeField] private float nvCoolDownTime = 15f;
-    [SerializeField] private float nightVisionTimer;
+    [SerializeField] public float nightVisionTimer;
     private bool nvCoolDown = false;
     
 
@@ -91,6 +91,7 @@ public class Abilities : MonoBehaviour
         {
             nightVisionMaterial.SetFloat("_Enabled", 0);
             NightVisionEnabled = false;
+            nvCoolDown = true;
             nightVisionTimer = nvCoolDownTime;
         }
         else if(!nvCoolDown)
@@ -132,6 +133,7 @@ public class Abilities : MonoBehaviour
 
     private void NightVisionUpdate()
     {
+        Debug.Log(nightVisionTimer);
         if (NightVisionEnabled || nvCoolDown)
         {
             nightVisionTimer -= Time.deltaTime;

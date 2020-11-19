@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 5716465704718606212}
   - component: {fileID: 5522887562038564080}
   - component: {fileID: 7086054055657296986}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +722,7 @@ GameObject:
   - component: {fileID: 3828285535051603705}
   - component: {fileID: 2221256901054997610}
   - component: {fileID: 2510673288348603021}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall2a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +814,7 @@ GameObject:
   - component: {fileID: 7393574179499090607}
   - component: {fileID: 2378673397139783837}
   - component: {fileID: 5366044913165606756}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1029,7 +1029,7 @@ GameObject:
   - component: {fileID: 5272967123087632507}
   - component: {fileID: 6419747589955796140}
   - component: {fileID: 4225639267765283948}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall1a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1163,7 +1163,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1206117305299594356
 Transform:

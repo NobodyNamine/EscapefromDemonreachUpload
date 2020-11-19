@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : Character
 {
     private Abilities abilityData;
     [SerializeField]
     private Canvas loseCanvas;
+    [SerializeField]
+    private Canvas UICanvas;
+    [SerializeField]
+    private Text nightvisionTimer;
     private GameManager gameManager;
     private Enemy alfred;
+
+    private int nightVisionCooldown;
 
     private bool spottedAlfred;
 
@@ -31,6 +38,13 @@ public class Player : Character
         abilityData.ProcessVisuals();
         PlayStinger();
         AwayFromEnemy();
+
+        nightVisionCooldown = (int)abilityData.nightVisionTimer;
+
+        if (abilityData.nightVisionTimer > 0)
+            nightvisionTimer.text = nightVisionCooldown.ToString();
+        else
+            nightvisionTimer.text = "0";
     }
 
     //Method used to check for input from the player
@@ -57,7 +71,7 @@ public class Player : Character
     {
         if(other.GetComponent<Alfred>() != null || other.GetComponent<Harry>() != null)
         {
-            //UIManager.instance.ForwardCanvas(loseCanvas);
+            UIManager.instance.ForwardCanvas(loseCanvas);
             //Change game state here
             GetComponent<FirstPersonController>().enabled = false;
             GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
@@ -94,7 +108,7 @@ public class Player : Character
 
     private void PlayStinger()
     {
-        if (CheckDistanceToEnemy() < 60)
+        if (CheckDistanceToEnemy() < 40)
         { 
             if (CheckAngleToEnemy() < 20)
             {
@@ -115,7 +129,7 @@ public class Player : Character
         //Shooting out a raycast in that direction
         //RaycastHit hit;
         int layerMask = 1 << 9;
-        bool detected = Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), gameObject.transform.forward, CheckDistanceToEnemy(), layerMask);
+        bool detected = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), gameObject.transform.forward, CheckDistanceToEnemy(), layerMask);
 
         if (detected)
         {
@@ -129,9 +143,8 @@ public class Player : Character
 
     private void AwayFromEnemy() 
     {
-        if (CheckDistanceToEnemy() > 60)
+        if (CheckDistanceToEnemy() > 40)
         {
-            Debug.Log("No More Alfred");
             spottedAlfred = false;
         }
     }

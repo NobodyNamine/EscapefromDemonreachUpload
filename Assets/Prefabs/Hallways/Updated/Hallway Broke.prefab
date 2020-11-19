@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8876658566056375438
 Transform:
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 943367958324427349}
   - component: {fileID: 5372366069716670567}
   - component: {fileID: 2446793566331439006}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 2495437343290372225}
   - component: {fileID: 3646581752649917526}
   - component: {fileID: 5848126587307160726}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall1a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 459090535884195660}
   - component: {fileID: 7906477225370787257}
   - component: {fileID: 5545407533860232210}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cracked_Wall:pCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 6821838302411671043}
   - component: {fileID: 8457682868429536400}
   - component: {fileID: 5285942481734994551}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall2a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 2654929045847148414}
   - component: {fileID: 2822059707095174154}
   - component: {fileID: 710016494096469152}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

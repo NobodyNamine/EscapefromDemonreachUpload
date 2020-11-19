@@ -16,10 +16,7 @@ public class Door : Interactable
     }
 
     protected override void Interaction(Collider other)
-    {
-
-        Debug.Log("In Rnage");
-
+    { 
         if (!other.GetComponent<Player>())
             return;
 

@@ -55,13 +55,13 @@ public class Enemy : Character
         if (detectPlayerResults)
         {
             Debug.Log("CHASING");
+            // enemy has found player
+            foundPlayer = true;
 
             // If the enemy has found the player before entering chase state, start playing the chase music
             if (!foundPlayer)
                 audioManager.PlayChase();
 
-            // enemy has found player
-            foundPlayer = true;
 
             currentState = enemyAiState.CHASE;
         }
@@ -97,12 +97,12 @@ public class Enemy : Character
 
                     // the enemy has not found the player
                     foundPlayer = false;
-
+/*
                     currentState = enemyAiState.INVESTIGATE;
-                    areaPatroling = Area.SPECIFIC;
+                    areaPatroling = Area.SPECIFIC;*/
 
                     //Find the closest Node to where the player was and look around there
-                    FindClosestNode();
+                    meshAgent.SetDestination(path.transform.position);
                     //probably need some way to mark a node as "evidence" should be whatever node the player was closest too when they were last seen
                 }
 
@@ -138,13 +138,13 @@ public class Enemy : Character
         for(int i = 0; i < NUM_OF_RAYS; i++)
         {
             //Calculating direction of the ray
-            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), transform.position.y + 0.2f
+            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0
                 , Mathf.Cos((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
             RaycastHit hit;
             Player potentialPlayer;
 
             //Shooting out a raycast in that direction
-            bool detected = Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), rayDir, out hit, VISION_DISTANCE, layerMask);
+            bool detected = Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), rayDir, out hit, VISION_DISTANCE, layerMask);
 
             if(detected)
             {
@@ -166,13 +166,9 @@ public class Enemy : Character
     //The value of the areaPatrolling variable should be the main difference between those states
     protected void Patrol() 
     {
-        //audioManager.StopChase();
-
-        //Check if we reached our next node
         if (Vector3.Distance(transform.position, path.position) <= 3)
         {
             PickNextNode();
-            Debug.Log("Here");
         }
     }
 
@@ -181,10 +177,10 @@ public class Enemy : Character
         for (int i = 0; i < NUM_OF_RAYS; i++)
         {
             //Calculating direction of the ray
-            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), transform.position.y + .1f
+            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0
                 , Mathf.Cos((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
 
-            Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y + .1f, transform.position.z), new Vector3(transform.position.x, transform.position.y + .1f, transform.position.z) + rayDir * VISION_DISTANCE);
+            Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.position.x, transform.position.y, transform.position.z) + rayDir * VISION_DISTANCE);
         }
     }
 
@@ -192,13 +188,11 @@ public class Enemy : Character
     {
         if (areaPatroling == Area.ALL)
             path = path.next;
-        else
-            path = path.alternateNext;
 
         meshAgent.SetDestination(path.position);
     }
 
-    protected void FindClosestNode()
+    protected Node FindClosestNode()
     {
         //Finds the closest node and sets that to our path
         int index = 0;
@@ -213,12 +207,8 @@ public class Enemy : Character
                 index = i;
             }
         }
-        if (areaPatroling == Area.ALL)
-            path = GameManager.instance.allNodes[index];
-        else
-            path = GameManager.instance.allNodes[index];
 
-        meshAgent.SetDestination(path.position);
+        return GameManager.instance.allNodes[index];
     }
 
     //IEnumerator Step()
