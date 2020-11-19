@@ -17,7 +17,7 @@ public class Enemy : Character
     private float timer = 0;
     private const int NUM_OF_RAYS = 20;
     private const float CONE_DEGREES = 180;
-    private const float VISION_DISTANCE = 20;
+    private const float VISION_DISTANCE = 30;
     private const float MAX_SPEED = 10;
 
     protected bool foundPlayer = false;

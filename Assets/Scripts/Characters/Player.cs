@@ -108,7 +108,7 @@ public class Player : Character
 
     private void PlayStinger()
     {
-        if (CheckDistanceToEnemy() < 40)
+        if (CheckDistanceToEnemy() < 20)
         { 
             if (CheckAngleToEnemy() < 20)
             {
@@ -143,7 +143,7 @@ public class Player : Character
 
     private void AwayFromEnemy() 
     {
-        if (CheckDistanceToEnemy() > 40)
+        if (CheckDistanceToEnemy() > 20)
         {
             spottedAlfred = false;
         }

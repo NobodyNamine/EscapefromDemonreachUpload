@@ -26878,7 +26878,7 @@ PrefabInstance:
     - target: {fileID: 6342130407276399600, guid: 0ea2126778423624b87d699217e1b2a7,
         type: 3}
       propertyPath: m_Name
-      value: GameManager (1)
+      value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 6342130407276399602, guid: 0ea2126778423624b87d699217e1b2a7,
         type: 3}
