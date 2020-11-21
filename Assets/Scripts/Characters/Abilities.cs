@@ -17,7 +17,7 @@ public enum VignetteState
 
 public class Abilities : MonoBehaviour
 {
-    private ShapeShiftState currentState;
+    public ShapeShiftState currentState;
 
     public bool enableVignette;
     private VignetteState vignetteState;
