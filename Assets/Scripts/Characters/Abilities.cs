@@ -24,8 +24,8 @@ public class Abilities : MonoBehaviour
 
     private bool NightVisionEnabled = false;
     [SerializeField] private Material nightVisionMaterial;
-    [SerializeField] private float nvActiveTime = 3f;
-    [SerializeField] private float nvCoolDownTime = 15f;
+    [SerializeField] private float nvActiveTime = 10f;
+    [SerializeField] private float nvCoolDownTime = 5f;
     [SerializeField] private float nightVisionTimer;
     [SerializeField] private Text nightVisionText;
     [SerializeField] private Image nightVisionImage;
