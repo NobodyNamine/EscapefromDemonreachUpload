@@ -15,7 +15,7 @@ public class Node : MonoBehaviour
     public Node next;
     [SerializeField]
     private Area areaContainedIn;
-    void Start()
+    void Awake()
     {
         position = transform.position;
     }

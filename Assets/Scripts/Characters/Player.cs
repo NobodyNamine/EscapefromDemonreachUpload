@@ -65,11 +65,13 @@ public class Player : Character
     {
         if(other.GetComponent<Alfred>() != null || other.GetComponent<Harry>() != null)
         {
+            transform.LookAt(new Vector3(other.transform.position.x, other.transform.position.y + 1.0f, other.transform.position.z));
             UIManager.instance.ForwardCanvas(loseCanvas);
             //Change game state here
             GetComponent<FirstPersonController>().enabled = false;
             GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
             Cursor.visible = true;
+            UICanvas.gameObject.SetActive(false);
         }
     }
 
