@@ -1058,8 +1058,8 @@ MonoBehaviour:
   nightVisionText: {fileID: 2939954740404881724}
   nightVisionImage: {fileID: 2411543499716533716}
   transformationImage: {fileID: 3269607880627991304}
-  ratSprite: {fileID: 21300000, guid: 8b94729784550f04783ef68b6479e7cb, type: 3}
-  humanSprite: {fileID: 21300000, guid: a725ae5edec72ef4bbafd112f321e63c, type: 3}
+  ratSprite: {fileID: 21300000, guid: 35b57057c9a23864496e3665d5d0f26e, type: 3}
+  humanSprite: {fileID: 21300000, guid: bca30b79d8d467749b917032357b3317, type: 3}
   ratSpeedScale: 0.5
 --- !u!1 &7114236212246752102
 GameObject:

@@ -115,7 +115,7 @@ public class Player : Character
     {
         if (CheckDistanceToEnemy() < 20)
         { 
-            if (CheckAngleToEnemy() < 20)
+            if (CheckAngleToEnemy() < 60)
             {
                 if (CheckForWall())
                 {
