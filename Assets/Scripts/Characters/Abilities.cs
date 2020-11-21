@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ShapeShiftState
 {
@@ -25,7 +26,12 @@ public class Abilities : MonoBehaviour
     [SerializeField] private Material nightVisionMaterial;
     [SerializeField] private float nvActiveTime = 3f;
     [SerializeField] private float nvCoolDownTime = 15f;
-    [SerializeField] public float nightVisionTimer;
+    [SerializeField] private float nightVisionTimer;
+    [SerializeField] private Text nightVisionText;
+    [SerializeField] private Image nightVisionImage;
+    [SerializeField] private Image transformationImage;
+    [SerializeField] private Sprite ratSprite;
+    [SerializeField] private Sprite humanSprite;
     private bool nvCoolDown = false;
     
 
@@ -45,24 +51,37 @@ public class Abilities : MonoBehaviour
         currentState = ShapeShiftState.HUMAN;
         vignetteState = VignetteState.SMALL;
         nightVisionMaterial.SetFloat("_MaskStrength", VIGNETTE_MIN);
-        nightVisionTimer = nvActiveTime;
+        nightVisionTimer = 0;
+        nightVisionText.text = "";
+        nightVisionImage.color = new Color(1, 1, 1, 1);
 
         FPSRef = gameObject.GetComponent<FirstPersonController>();
         humanWalkSpeed = FPSRef.m_WalkSpeed;
         humanRunSpeed = FPSRef.m_RunSpeed;
+        
     }
 
     void Update()
     {
         NightVisionUpdate();
+        if (transformationImage.color.a > 0.01)
+            transformationImage.color = new Color(1, 1, 1, Mathf.Lerp(transformationImage.color.a, 0, .025f));
     }
 
     public void ToggleShapeShiftState()
     {
         if (currentState == ShapeShiftState.RAT)
+        {
             currentState = ShapeShiftState.HUMAN;
+            transformationImage.sprite = humanSprite;
+        }
         else
+        {
             currentState = ShapeShiftState.RAT;
+            transformationImage.sprite = ratSprite;
+        }
+
+        transformationImage.color = Color.white;
     }
 
     public void DoShapeShift()
@@ -99,6 +118,8 @@ public class Abilities : MonoBehaviour
             nightVisionMaterial.SetFloat("_Enabled", 1);
             NightVisionEnabled = true;
             nightVisionTimer = nvActiveTime;
+            nightVisionText.text = "";
+            nightVisionImage.color = new Color(1, 1, 1, .2f);
         }
     }
 
@@ -133,7 +154,6 @@ public class Abilities : MonoBehaviour
 
     private void NightVisionUpdate()
     {
-        Debug.Log(nightVisionTimer);
         if (NightVisionEnabled || nvCoolDown)
         {
             nightVisionTimer -= Time.deltaTime;
@@ -145,8 +165,14 @@ public class Abilities : MonoBehaviour
                     ToggleNightVision();
                 }
                 else if (nvCoolDown)
+                {
+                    nightVisionText.text = "";
+                    nightVisionImage.color = new Color(1, 1, 1, 1);
                     nvCoolDown = false;
+                }
             }
+            else if(!NightVisionEnabled)
+                nightVisionText.text = ((int)nightVisionTimer).ToString();
         }
     }
 

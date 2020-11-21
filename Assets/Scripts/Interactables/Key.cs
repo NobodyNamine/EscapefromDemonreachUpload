@@ -47,5 +47,6 @@ public class Key : Interactable
         //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
         Destroy(gameObject);
         gameManager.CollectKey();
+        other.gameObject.GetComponent<Player>().UpdateKeysText();
     }
 }

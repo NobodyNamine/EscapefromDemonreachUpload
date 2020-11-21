@@ -12,7 +12,7 @@ public class Player : Character
     [SerializeField]
     private Canvas UICanvas;
     [SerializeField]
-    private Text nightvisionTimer;
+    private Text keysText;
     private GameManager gameManager;
     private Enemy alfred;
 
@@ -27,6 +27,7 @@ public class Player : Character
         alfred = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
         FindGameManager();
         FindAudioManager();
+        UpdateKeysText();
     }
 
     // Update is called once per frame
@@ -38,13 +39,6 @@ public class Player : Character
         abilityData.ProcessVisuals();
         PlayStinger();
         AwayFromEnemy();
-
-        nightVisionCooldown = (int)abilityData.nightVisionTimer;
-
-        if (abilityData.nightVisionTimer > 0)
-            nightvisionTimer.text = nightVisionCooldown.ToString();
-        else
-            nightvisionTimer.text = "0";
     }
 
     //Method used to check for input from the player
@@ -104,6 +98,11 @@ public class Player : Character
         float angle = Vector3.Angle(targetDir, gameObject.transform.forward);
         //Debug.Log(angle);
         return angle;
+    }
+
+    public void UpdateKeysText()
+    {
+        keysText.text = GameManager.instance.KeysAquired.ToString() + "/" + GameManager.instance.KeysRequired.ToString();
     }
 
     private void PlayStinger()
