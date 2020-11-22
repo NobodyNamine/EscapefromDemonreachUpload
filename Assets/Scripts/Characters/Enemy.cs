@@ -32,7 +32,7 @@ public class Enemy : Character
 
     protected NavMeshAgent meshAgent;
 
-    private enemyAiState currentState;
+    public enemyAiState currentState;
 
     public Node path;
     // Start is called before the first frame update
