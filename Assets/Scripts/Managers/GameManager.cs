@@ -17,10 +17,12 @@ public class GameManager : MonoBehaviour
 
     public List<Node> allNodes;
 
-    private int keysAquired = 0;
+    public int keysAquired = 0;
     private const int NUM_OF_KEYS_REQUIRED = 5;
 
     private gameState currentState;
+
+    private Enemy enemyRef;
 
     //Properties
     public int KeysAquired { get { return keysAquired; } }
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
         //set the game state
         currentState = gameState.MAINMENU;
         //having to always launch from the Main Menu during development would be annoying so OnSceneLoaded accounts for that
+
+        enemyRef = GetComponent<Enemy>();
     }
 
     // Update is called once per frame
@@ -62,6 +66,8 @@ public class GameManager : MonoBehaviour
 
             case gameState.GAMEPLAY:
                 //things happen here probably, offload what you can into other Manager class helper methods
+                if (keysAquired >= NUM_OF_KEYS_REQUIRED)
+                    enemyRef.currentState = enemyAiState.CHASE;
                 break;
 
             case gameState.PAUSE:

@@ -1052,12 +1052,14 @@ MonoBehaviour:
   currentState: 0
   enableVignette: 0
   nightVisionMaterial: {fileID: 0}
-  nvActiveTime: 3
-  nvCoolDownTime: 15
+  nvActiveTime: 10
+  nvCoolDownTime: 5
   nightVisionTimer: 0
   nightVisionText: {fileID: 2939954740404881724}
   nightVisionImage: {fileID: 2411543499716533716}
   transformationImage: {fileID: 3269607880627991304}
+  nvOnSprite: {fileID: 21300000, guid: 7e51e30362342fa4796e114d9d226b9d, type: 3}
+  nvOffSprite: {fileID: 21300000, guid: b9bcb588b0fe75d45a152905e30fba59, type: 3}
   ratSprite: {fileID: 21300000, guid: 35b57057c9a23864496e3665d5d0f26e, type: 3}
   humanSprite: {fileID: 21300000, guid: bca30b79d8d467749b917032357b3317, type: 3}
   ratSpeedScale: 0.5

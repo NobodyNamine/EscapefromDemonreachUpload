@@ -30,6 +30,8 @@ public class Abilities : MonoBehaviour
     [SerializeField] private Text nightVisionText;
     [SerializeField] private Image nightVisionImage;
     [SerializeField] private Image transformationImage;
+    [SerializeField] private Sprite nvOnSprite;
+    [SerializeField] private Sprite nvOffSprite;
     [SerializeField] private Sprite ratSprite;
     [SerializeField] private Sprite humanSprite;
     private bool nvCoolDown = false;
@@ -112,6 +114,7 @@ public class Abilities : MonoBehaviour
             NightVisionEnabled = false;
             nvCoolDown = true;
             nightVisionTimer = nvCoolDownTime;
+            nightVisionImage.sprite = nvOnSprite;
         }
         else if(!nvCoolDown)
         {
@@ -120,6 +123,7 @@ public class Abilities : MonoBehaviour
             nightVisionTimer = nvActiveTime;
             nightVisionText.text = "";
             nightVisionImage.color = new Color(1, 1, 1, .2f);
+            nightVisionImage.sprite = nvOffSprite;
         }
     }
 
