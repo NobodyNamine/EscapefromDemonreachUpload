@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     {
         canvasTracker.Peek().gameObject.SetActive(false);
         canvasTracker.Pop();
-        canvasTracker.Peek().gameObject.SetActive(true);
+        if(canvasTracker.Count > 0)
+            canvasTracker.Peek().gameObject.SetActive(true);
     }
 }

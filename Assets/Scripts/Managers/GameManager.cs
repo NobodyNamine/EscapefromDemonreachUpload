@@ -7,7 +7,8 @@ public enum gameState
 {
     MAINMENU,
     GAMEPLAY,
-    PAUSE
+    PAUSE,
+    OVER
 }
 
 public class GameManager : MonoBehaviour
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
     //Properties
     public int KeysAquired { get { return keysAquired; } }
     public int KeysRequired { get { return NUM_OF_KEYS_REQUIRED; } }
-    public gameState CurrentState { get { return currentState; } }
+    public gameState CurrentState { get { return currentState; } set{ currentState = value; } }
 
     //Methods
     //Turns GameManagers into serial killers who survive scene transistions and murder any other baby GameManagers they encounter
@@ -47,7 +48,10 @@ public class GameManager : MonoBehaviour
         InputData.Initialize();
 
         //set the game state
-        currentState = gameState.MAINMENU;
+        if (SceneManager.GetActiveScene().name != "StartScene")
+            currentState = gameState.GAMEPLAY;
+        else
+            currentState = gameState.MAINMENU;
         //having to always launch from the Main Menu during development would be annoying so OnSceneLoaded accounts for that
     }
 
