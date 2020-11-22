@@ -17,6 +17,9 @@ public class Door : Interactable
 
     protected override void Interaction(Collider other)
     { 
+    }
+    void OnTriggerEnter(Collider other)
+    {
         if (!other.GetComponent<Player>())
             return;
 
