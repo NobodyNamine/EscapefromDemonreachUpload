@@ -62205,7 +62205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1705272131
 Light:
   m_ObjectHideFlags: 0
@@ -67073,6 +67073,16 @@ PrefabInstance:
       propertyPath: nightVisionMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 14e2949e25d05cb42b07646ba0822a6a, type: 2}
+    - target: {fileID: 9079632224793056389, guid: 0707a4ecc8e0c994d8a4d5ab006784e3,
+        type: 3}
+      propertyPath: nvActiveTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079632224793056389, guid: 0707a4ecc8e0c994d8a4d5ab006784e3,
+        type: 3}
+      propertyPath: nvCoolDownTime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0707a4ecc8e0c994d8a4d5ab006784e3, type: 3}
 --- !u!1001 &1822904364
