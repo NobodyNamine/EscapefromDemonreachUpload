@@ -1052,8 +1052,8 @@ MonoBehaviour:
   currentState: 0
   enableVignette: 0
   nightVisionMaterial: {fileID: 0}
-  nvActiveTime: 3
-  nvCoolDownTime: 15
+  nvActiveTime: 10
+  nvCoolDownTime: 5
   nightVisionTimer: 0
   nightVisionText: {fileID: 2939954740404881724}
   nightVisionImage: {fileID: 2411543499716533716}
