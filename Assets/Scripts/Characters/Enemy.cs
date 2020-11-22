@@ -44,7 +44,8 @@ public class Enemy : Character
         currentState = enemyAiState.PATROL;
         //currentKeyNode = KeyNodes[Random.Range(0, GameManager.instance.KeysRequired)];
         currentKeyNode = KeyNodes[0];
-        transform.position = currentKeyNode.position;
+        path = currentKeyNode;
+        transform.position = path.position;
         meshAgent.SetDestination(path.position);
         FindAudioManager();
         //StartCoroutine("Step");
@@ -54,6 +55,17 @@ public class Enemy : Character
     // Update is called once per frame
     protected virtual void Update()
     {
+        if (GameManager.instance.CurrentState == gameState.PAUSE)
+        {
+            meshAgent.enabled = false;
+            return;
+        }
+
+        if (meshAgent.enabled == false)
+        {
+            meshAgent.enabled = true;
+            meshAgent.SetDestination(currentKeyNode.position);
+        }
         if (capturedEnemy)
             return;
         //Chasing an invisible player takes priority over everything else so this line gets to be outside the state machine
@@ -79,23 +91,12 @@ public class Enemy : Character
                 Patrol();
                 break;
 
-            /*case enemyAiState.ALERTED:
-                //The enemy has gained some evidence, such as hearing the player (while in PATROL or INVESTIGATE) or losing sight of the player (while in CHASE)
-                //In this state, the enemy will proceed to node which is closest to the evidence and will switch to INVESTIGATE upon arrival
-
-                //when I arrive at my destination node, find which collection that node beloned to and switch my state to INVESTIGATE
-                //That collection of nodes is the target of my investigation
-                break;*/
-
             case enemyAiState.CHASE:
                 //The enemy enters this state if they actively see the player during any of the other states
                 //They pursue the player
-
                 //If I lose sight of the player then this happens
                 if (!detectPlayerResults && Vector3.Distance(transform.position, meshAgent.destination) <= 1)
                 {
-                    Debug.Log("Lost Player");
-
                     // If the enemy had found the player before going into investigate, stop playing hte chase music
                     if (foundPlayer)
                         audioManager.StopChase();

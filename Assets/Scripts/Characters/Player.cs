@@ -12,6 +12,8 @@ public class Player : Character
     [SerializeField]
     private Canvas UICanvas;
     [SerializeField]
+    private Canvas pauseCanvas;
+    [SerializeField]
     private Text keysText;
     private GameManager gameManager;
     private Enemy alfred;
@@ -44,20 +46,42 @@ public class Player : Character
     //Method used to check for input from the player
     private void ProcessInput()
     {
-        //Toggling our shapeshift
-        if (InputData.ActionPressed("shapeshift"))
+        if (GameManager.instance.CurrentState == gameState.GAMEPLAY)
         {
-            abilityData.ToggleShapeShiftState();
-        }
-        //Toggling Nightvision
-        if (InputData.ActionPressed("toggleNightVision"))
-        {
-            abilityData.ToggleNightVision();
-        }
+            if (InputData.ActionPressed("pause"))
+            {
+                UIManager.instance.ForwardCanvas(pauseCanvas);
+                GameManager.instance.CurrentState = gameState.PAUSE;
 
-        if(InputData.ActionPressed("debugEnableVignette"))
+                GetComponent<FirstPersonController>().enabled = false;
+                GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
+            }
+            //Toggling our shapeshift
+            if (InputData.ActionPressed("shapeshift"))
+            {
+                abilityData.ToggleShapeShiftState();
+            }
+            //Toggling Nightvision
+            if (InputData.ActionPressed("toggleNightVision"))
+            {
+                abilityData.ToggleNightVision();
+            }
+
+            if (InputData.ActionPressed("debugEnableVignette"))
+            {
+                abilityData.ToggleVignette();
+            }
+        }
+        else if(GameManager.instance.CurrentState == gameState.PAUSE)
         {
-            abilityData.ToggleVignette();
+            if(InputData.ActionPressed("pause"))
+            {
+                UIManager.instance.BackButton();
+                GameManager.instance.CurrentState = gameState.GAMEPLAY;
+
+                GetComponent<FirstPersonController>().enabled = true;
+                GetComponent<FirstPersonController>().MouseLook.SetCursorLock(true);
+            }
         }
     }
 
@@ -72,11 +96,12 @@ public class Player : Character
             }
             UIManager.instance.ForwardCanvas(loseCanvas);
             //Change game state here
-            GetComponent<FirstPersonController>().enabled = false;
             GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
+            GetComponent<FirstPersonController>().enabled = false;
             audioManager.StopChase();
             Cursor.visible = true;
             UICanvas.gameObject.SetActive(false);
+            GameManager.instance.CurrentState = gameState.OVER;
         }
     }
 
@@ -103,7 +128,6 @@ public class Player : Character
     {
         Vector3 targetDir = alfred.transform.position - gameObject.transform.position;
         float angle = Vector3.Angle(targetDir, gameObject.transform.forward);
-        //Debug.Log(angle);
         return angle;
     }
 
@@ -153,5 +177,10 @@ public class Player : Character
         {
             spottedAlfred = false;
         }
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }
