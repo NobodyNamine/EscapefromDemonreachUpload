@@ -98,6 +98,8 @@ public class Player : Character
             //Change game state here
             GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
             GetComponent<FirstPersonController>().enabled = false;
+            audioManager.StopChase();
+            Cursor.visible = true;
             UICanvas.gameObject.SetActive(false);
             GameManager.instance.CurrentState = gameState.OVER;
         }

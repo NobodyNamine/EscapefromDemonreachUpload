@@ -32,7 +32,7 @@ public class Enemy : Character
 
     protected NavMeshAgent meshAgent;
 
-    private enemyAiState currentState;
+    public enemyAiState currentState;
 
     public Node path;
     // Start is called before the first frame update
@@ -73,13 +73,12 @@ public class Enemy : Character
         detectPlayerResults = DetectPlayer();
         if (detectPlayerResults)
         {
-            // enemy has found player
-            foundPlayer = true;
-
             // If the enemy has found the player before entering chase state, start playing the chase music
             if (!foundPlayer)
                 audioManager.PlayChase();
 
+            // enemy has found player
+            foundPlayer = true;
 
             currentState = enemyAiState.CHASE;
         }
