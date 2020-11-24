@@ -42,5 +42,4 @@ public class SliderBehavior : MonoBehaviour
 		sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFXBus");
 		sfxBus.setVolume(sfxSlider.value);
 	}
-
 }

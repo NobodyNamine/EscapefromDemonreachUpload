@@ -168759,6 +168759,8 @@ GameObject:
   - component: {fileID: 3569480744355898785}
   - component: {fileID: 3569480744355898788}
   - component: {fileID: 3569480744355898786}
+  - component: {fileID: 5312361464753210904}
+  - component: {fileID: 1082510178726488509}
   m_Layer: 0
   m_Name: Genius Loci
   m_TagString: Enemy
@@ -168849,6 +168851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   KeyNodes: []
+  currentState: 0
   path: {fileID: 0}
 --- !u!195 &3569480744355898788
 NavMeshAgent:
@@ -168888,6 +168891,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &5312361464753210904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569480744355898787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Enemy/Genius Loci/Voice/LociAmbience
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 8.6
+  OverrideMaxDistance: 490
+--- !u!114 &1082510178726488509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569480744355898787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Enemy/Genius Loci/Voice/LociBreaths
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 2.1000001
+  OverrideMaxDistance: 35
 --- !u!1 &6148008434371041238
 GameObject:
   m_ObjectHideFlags: 0

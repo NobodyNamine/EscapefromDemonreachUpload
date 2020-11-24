@@ -44,9 +44,19 @@ public class Key : Interactable
     {
         if (!other.GetComponent<Player>())
             return;
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/TestSounds/Glitch_1");
+
         Destroy(gameObject);
         gameManager.CollectKey();
+
+        if (gameManager.keysAquired == gameManager.KeysRequired)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Interactions/AllKeyGet");
+        }
+        else
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Interactions/KeyGet");
+        }
+
         other.gameObject.GetComponent<Player>().UpdateKeysText();
     }
 }

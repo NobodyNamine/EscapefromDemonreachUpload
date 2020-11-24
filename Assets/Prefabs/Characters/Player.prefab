@@ -830,6 +830,7 @@ GameObject:
   - component: {fileID: 7114236210967613604}
   - component: {fileID: 7509796945041031431}
   - component: {fileID: 9079632224793056389}
+  - component: {fileID: 6963290822813020989}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -1165,6 +1166,20 @@ MonoBehaviour:
   ratSprite: {fileID: 21300000, guid: 35b57057c9a23864496e3665d5d0f26e, type: 3}
   humanSprite: {fileID: 21300000, guid: bca30b79d8d467749b917032357b3317, type: 3}
   ratSpeedScale: 0.5
+--- !u!114 &6963290822813020989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7114236212246752100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 7114236212246752100}
+  ListenerNumber: -1
 --- !u!1 &7114236212246752102
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,11 +74,13 @@ public class Abilities : MonoBehaviour
     {
         if (currentState == ShapeShiftState.RAT)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Abilities/TransformHuman");
             currentState = ShapeShiftState.HUMAN;
             transformationImage.sprite = humanSprite;
         }
         else
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Abilities/TransformRat");
             currentState = ShapeShiftState.RAT;
             transformationImage.sprite = ratSprite;
         }
