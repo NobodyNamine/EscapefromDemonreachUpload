@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
             instance = this;
         }
     }
+
     public void ForwardCanvas(Canvas canvasToAdd)
     {
         if(canvasTracker.Count > 0)

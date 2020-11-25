@@ -14,6 +14,8 @@ public class Player : Character
     [SerializeField]
     private Canvas pauseCanvas;
     [SerializeField]
+    private Canvas optionsCanvas;
+    [SerializeField]
     private Text keysText;
     private GameManager gameManager;
     private Enemy alfred;
@@ -184,5 +186,15 @@ public class Player : Character
     {
         SceneManager.LoadScene(0);
         audioManager.StopAmbience();
+    }
+
+    public void GoToOptions()
+    {
+        UIManager.instance.ForwardCanvas(optionsCanvas);
+    }
+
+    public void GoBackToPause()
+    {
+        UIManager.instance.BackButton();
     }
 }
