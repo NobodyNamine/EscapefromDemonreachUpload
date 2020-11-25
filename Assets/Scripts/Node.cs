@@ -13,8 +13,6 @@ public class Node : MonoBehaviour
     public Vector3 position;
 
     public Node next;
-    [SerializeField]
-    private Area areaContainedIn;
     void Awake()
     {
         position = transform.position;

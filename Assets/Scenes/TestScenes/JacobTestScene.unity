@@ -11234,7 +11234,7 @@ PrefabInstance:
         type: 3}
       propertyPath: path
       value: 
-      objectReference: {fileID: 2133074149}
+      objectReference: {fileID: 0}
     - target: {fileID: 3569480744355898785, guid: 711db495b21c84e48b185ecb05d1335b,
         type: 3}
       propertyPath: KeyNodes.Array.data[0]
@@ -11260,10 +11260,25 @@ PrefabInstance:
       propertyPath: KeyNodes.Array.data[4]
       value: 
       objectReference: {fileID: 2133074149}
+    - target: {fileID: 3569480744355898786, guid: 711db495b21c84e48b185ecb05d1335b,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569480744355898786, guid: 711db495b21c84e48b185ecb05d1335b,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3569480744355898787, guid: 711db495b21c84e48b185ecb05d1335b,
         type: 3}
       propertyPath: m_Name
       value: Genius Loci
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569480744355898788, guid: 711db495b21c84e48b185ecb05d1335b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3569480744355898789, guid: 711db495b21c84e48b185ecb05d1335b,
         type: 3}
@@ -62213,7 +62228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1705272131
 Light:
   m_ObjectHideFlags: 0

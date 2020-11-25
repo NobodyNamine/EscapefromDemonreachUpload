@@ -38,6 +38,8 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.CurrentState == gameState.OVER)
+            return;
         //Checking for player input
         ProcessInput();
         abilityData.DoShapeShift();
@@ -104,6 +106,7 @@ public class Player : Character
             audioManager.StopChase();
             Cursor.visible = true;
             UICanvas.gameObject.SetActive(false);
+            Destroy(other.gameObject);
             GameManager.instance.CurrentState = gameState.OVER;
         }
     }

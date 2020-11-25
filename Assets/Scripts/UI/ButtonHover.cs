@@ -21,12 +21,12 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 new Vector3(selectorGraphic.transform.position.x,
                 this.transform.position.y,
                 selectorGraphic.transform.position.z);*/
-            alphaVal = Mathf.Lerp(alphaVal, 1.0f, .05f);
+            alphaVal = Mathf.Lerp(alphaVal, 1.0f, .1f);
             selectorGraphic.GetComponent<Image>().color = new Color(1, 1, 1, alphaVal);
         }
         else
         {
-            alphaVal = Mathf.Lerp(alphaVal, 0.0f, .05f);
+            alphaVal = Mathf.Lerp(alphaVal, 0.0f, .1f);
             selectorGraphic.GetComponent<Image>().color = new Color(1, 1, 1, alphaVal);
         }
     }

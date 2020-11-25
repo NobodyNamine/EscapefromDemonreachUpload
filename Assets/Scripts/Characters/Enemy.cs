@@ -42,14 +42,19 @@ public class Enemy : Character
         meshAgent = GetComponent<NavMeshAgent>();
         moveSpeed = 5;
         currentState = enemyAiState.PATROL;
-        //currentKeyNode = KeyNodes[Random.Range(0, GameManager.instance.KeysRequired)];
-        currentKeyNode = KeyNodes[0];
-        path = currentKeyNode;
-        transform.position = path.position;
-        meshAgent.SetDestination(path.position);
         FindAudioManager();
+        meshAgent.enabled = true;
+        meshAgent.SetDestination(path.transform.position);
         //StartCoroutine("Step");
 
+    }
+
+    void Awake()
+    {
+
+        currentKeyNode = KeyNodes[Random.Range(0, GameManager.instance.KeysRequired)];
+        path = currentKeyNode;
+        transform.position = path.transform.position;
     }
 
     // Update is called once per frame
@@ -120,12 +125,6 @@ public class Enemy : Character
                 //They will basically do the same thing they do in patrol, but about a small collection of nodes (which the one ALERTED took them too belongs too)
                 //instead of all nodes on the map
                 Patrol();
-                //After a certain amount of time happens, I will give up with the investigation, then switch my state to PATROL
-                timer += Time.deltaTime;
-
-                if (timer >= 30)
-                {
-                }
                 break;
         }
     }
@@ -141,7 +140,7 @@ public class Enemy : Character
         for(int i = 0; i < NUM_OF_RAYS; i++)
         {
             //Calculating direction of the ray
-            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0
+            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), .05f
                 , Mathf.Cos((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
             RaycastHit hit;
             Player potentialPlayer;
@@ -167,7 +166,7 @@ public class Enemy : Character
         for(int i = 0; i < NUM_OF_RAYS; i++)
         {
             //Calculating direction of the ray
-            Vector3 rayDir = new Vector3(Mathf.Sin((-transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0
+            Vector3 rayDir = new Vector3(Mathf.Sin((-transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), .05f
                 , Mathf.Cos((-transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
             RaycastHit hit;
             Player potentialPlayer;
@@ -214,12 +213,12 @@ public class Enemy : Character
         for (int i = 0; i < NUM_OF_RAYS; i++)
         {
             //Calculating direction of the ray
-            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0
+            Vector3 rayDir = new Vector3(Mathf.Sin((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0.05f
                 , Mathf.Cos((transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
 
             Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.position.x, transform.position.y, transform.position.z) + rayDir * VISION_DISTANCE);
 
-            rayDir = new Vector3(Mathf.Sin((-transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0
+            rayDir = new Vector3(Mathf.Sin((-transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad), 0.05f
                 , Mathf.Cos((-transform.rotation.eulerAngles.y + (((float)i / NUM_OF_RAYS) * CONE_DEGREES) - CONE_DEGREES / 2) * Mathf.Deg2Rad));
 
             Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.position.x, transform.position.y, transform.position.z) + rayDir * VISION_DISTANCE/2);
@@ -302,17 +301,14 @@ public class Enemy : Character
         return nodesToPathTo[indexOfFurthest];
         
     }
-
+/*
     void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null)
         {
-            transform.position -= 1.5f * (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z));
-            transform.LookAt(new Vector3(other.transform.position.x, other.transform.position.y - 3.0f, other.transform.position.z));
-            capturedEnemy = true;
-            meshAgent.enabled = false;
+            
         }
-    }
+    }*/
 
     //IEnumerator Step()
     //{
