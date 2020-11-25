@@ -27691,6 +27691,11 @@ PrefabInstance:
       propertyPath: Preload
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1334658804971772687, guid: 0ea2126778423624b87d699217e1b2a7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6342130407276399600, guid: 0ea2126778423624b87d699217e1b2a7,
         type: 3}
       propertyPath: m_Name
@@ -67076,6 +67081,11 @@ PrefabInstance:
     - target: {fileID: 7114236212247246660, guid: 0707a4ecc8e0c994d8a4d5ab006784e3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114236212248458596, guid: 0707a4ecc8e0c994d8a4d5ab006784e3,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7211980899513042797, guid: 0707a4ecc8e0c994d8a4d5ab006784e3,

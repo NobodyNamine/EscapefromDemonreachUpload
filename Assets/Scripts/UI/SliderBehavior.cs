@@ -16,6 +16,14 @@ public class SliderBehavior : MonoBehaviour
 		masterSlider.onValueChanged.AddListener(delegate { MasterSlider(); });
 		musicSlider.onValueChanged.AddListener(delegate { MusicSlider(); });
 		sfxSlider.onValueChanged.AddListener(delegate { SFXSlider(); });
+
+		FMODUnity.RuntimeManager.GetBus("bus:/").getVolume(out float volumeMaster);
+		FMODUnity.RuntimeManager.GetBus("bus:/MusicBus").getVolume(out float volumeMusic);
+		FMODUnity.RuntimeManager.GetBus("bus:/SFXBus").getVolume(out float volumeSFX);
+
+		masterSlider.value = volumeMaster;
+		musicSlider.value = volumeMusic;
+		sfxSlider.value = volumeSFX;
 	}
 
 	// Invoked when the value of the slider changes.

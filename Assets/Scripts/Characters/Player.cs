@@ -29,6 +29,7 @@ public class Player : Character
         alfred = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
         FindGameManager();
         FindAudioManager();
+        audioManager.PlayAmbience();
         UpdateKeysText();
     }
 
@@ -182,5 +183,6 @@ public class Player : Character
     public void MainMenuButton()
     {
         SceneManager.LoadScene(0);
+        audioManager.StopAmbience();
     }
 }
