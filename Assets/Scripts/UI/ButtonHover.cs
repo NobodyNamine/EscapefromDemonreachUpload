@@ -7,20 +7,14 @@ using UnityEngine.UI;
 // Button Hover Reference: https://answers.unity.com/questions/1199251/onmouseover-ui-button-c.html
 public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private bool mouse_over = false;
+    public bool mouse_over = false;
     public Image selectorGraphic;
-    private float alphaVal = 0;
+    public float alphaVal = 0;
 
     void Update()
     {
         if (mouse_over)
-        {/*
-            selectorGraphic.SetActive(true);
-
-            selectorGraphic.transform.position = 
-                new Vector3(selectorGraphic.transform.position.x,
-                this.transform.position.y,
-                selectorGraphic.transform.position.z);*/
+        {
             alphaVal = Mathf.Lerp(alphaVal, 1.0f, .1f);
             selectorGraphic.GetComponent<Image>().color = new Color(1, 1, 1, alphaVal);
         }
