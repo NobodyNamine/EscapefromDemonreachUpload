@@ -48,6 +48,11 @@ public class Abilities : MonoBehaviour
     private float humanRunSpeed;
     [SerializeField] private float ratSpeedScale = 0.5f;
 
+    public bool Night_Vision_Enabled
+    {
+        get { return NightVisionEnabled; }
+    }
+
     void Start()
     {
         currentState = ShapeShiftState.HUMAN;

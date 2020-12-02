@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
                 break;
 
             case gameState.GAMEPLAY:
+                keysAquired = 0;
+
                 GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
 
                 for (int i = 0; i < nodes.Length; i++)

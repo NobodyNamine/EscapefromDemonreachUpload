@@ -99,6 +99,8 @@ public class Player : Character
             {
                 abilityData.ToggleShapeShiftState();
             }
+            if (abilityData.Night_Vision_Enabled)
+                abilityData.ToggleNightVision();
             UIManager.instance.ForwardCanvas(loseCanvas);
             //Change game state here
             GetComponent<FirstPersonController>().MouseLook.SetCursorLock(false);
