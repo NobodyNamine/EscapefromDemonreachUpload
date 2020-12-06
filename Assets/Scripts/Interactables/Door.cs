@@ -26,6 +26,7 @@ public class Door : Interactable
         if (gameManager.KeysAquired >= gameManager.KeysRequired)
         {
             gameManager.SwitchToScene(0);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().EnableFirstPerson(false);
         }
     }
 }

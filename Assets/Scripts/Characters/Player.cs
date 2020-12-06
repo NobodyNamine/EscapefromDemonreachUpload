@@ -33,6 +33,7 @@ public class Player : Character
         FindAudioManager();
         //audioManager.PlayAmbience();
         UpdateKeysText();
+        EnableFirstPerson(true);
     }
 
     // Update is called once per frame
@@ -201,5 +202,11 @@ public class Player : Character
     public void GoBackToPause()
     {
         UIManager.instance.BackButton();
+    }
+
+    public void EnableFirstPerson(bool state)
+    {
+        GetComponent<FirstPersonController>().enabled = state;
+        GetComponent<FirstPersonController>().MouseLook.SetCursorLock(state);
     }
 }
