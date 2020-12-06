@@ -38,6 +38,10 @@ public class Enemy : Character
     // Start is called before the first frame update
     void Start()
     {
+        currentKeyNode = KeyNodes[Random.Range(0, GameManager.instance.KeysRequired)];
+        path = currentKeyNode;
+        transform.position = path.transform.position;
+
         rigidbody = GetComponent<Rigidbody>();
         meshAgent = GetComponent<NavMeshAgent>();
         moveSpeed = 5;
@@ -51,10 +55,6 @@ public class Enemy : Character
 
     void Awake()
     {
-
-        currentKeyNode = KeyNodes[Random.Range(0, GameManager.instance.KeysRequired)];
-        path = currentKeyNode;
-        transform.position = path.transform.position;
     }
 
     // Update is called once per frame
